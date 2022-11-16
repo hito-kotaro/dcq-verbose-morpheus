@@ -1,7 +1,8 @@
 import React from 'react'
+import ListItem from './components/ListItem'
 
-function App() {
-  return <div>hello world</div>
+const App = () => {
+  return <ListItem />
 }
 
 export default App
