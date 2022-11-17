@@ -27,6 +27,8 @@ module.exports = {
   rules: {
     'arrow-body-style': 'off',
     'no-use-before-define': 'off',
+    'react/require-default-props': 'off',
+    'react/no-unused-prop-types': 'warn',
     'react/function-component-definition': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'import/prefer-default-export': 'off',
