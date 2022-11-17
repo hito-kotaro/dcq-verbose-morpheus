@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import TextField from '@mui/material/TextField'
 import useTextField from '../useTextField'
 
-const QuestReportForm = () => {
+type Props = {
+  onCancel: () => void
+}
+
+const QuestReportForm: FC<Props> = (props) => {
+  const { onCancel } = props
   const form = useTextField()
   return (
     <>
@@ -19,8 +24,9 @@ const QuestReportForm = () => {
         variant="standard"
       />
       <ButtonGroup variant="contained" fullWidth sx={{ mt: 2 }}>
+        {/* ここのonCickは後ほどApiのアクセスになる */}
         <Button onClick={form.clear}>報告</Button>
-        <Button color="secondary" sx={{ width: '100px' }}>
+        <Button onClick={onCancel} color="secondary" sx={{ width: '100px' }}>
           戻る
         </Button>
       </ButtonGroup>

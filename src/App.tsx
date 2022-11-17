@@ -3,6 +3,7 @@ import DetailCard from './components/DetailCard'
 import QuestReportForm from './components/QuestReportForm'
 
 const App = () => {
+  const onCancel = () => console.log('cancel')
   return (
     <DetailCard
       title="タイトル"
@@ -10,8 +11,7 @@ const App = () => {
       description="詳細の説明を入力します。"
       image="cosmic1"
       point={1}
-      onClick={() => console.log('click')}
-      forms={<QuestReportForm />}
+      forms={<QuestReportForm onCancel={onCancel} />}
     />
   )
 }

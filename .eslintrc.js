@@ -29,6 +29,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'react/require-default-props': 'off',
     'react/no-unused-prop-types': 'warn',
+    'react/jsx-props-no-spreading': 'warn',
     'react/function-component-definition': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'import/prefer-default-export': 'off',

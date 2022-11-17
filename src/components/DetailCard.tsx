@@ -1,17 +1,15 @@
 import React, { ReactElement, FC } from 'react'
 import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import ButtonGroup from '@mui/material/ButtonGroup'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
 import CardMedia from '@mui/material/CardMedia'
 import Stack from '@mui/material/Stack'
-import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import WarningIcon from '@mui/icons-material/Warning'
 import { pink, red } from '@mui/material/colors'
+import { Divider } from '@mui/material'
 
 type Props = {
   title: string
@@ -20,12 +18,11 @@ type Props = {
   image: string
   point: number
   penalty?: boolean
-  onClick: () => void
   forms: ReactElement
 }
 
 const DetailCard: FC<Props> = (props) => {
-  const { title, date, description, image, point, penalty, onClick, forms } = props
+  const { title, date, description, image, point, penalty, forms } = props
 
   return (
     <Card sx={{ minWidth: 256, maxWidth: '30%' }}>
@@ -55,6 +52,8 @@ const DetailCard: FC<Props> = (props) => {
             {`x ${point}`}
           </Typography>
         </Stack>
+
+        <Divider sx={{ my: 1 }} />
 
         {forms}
       </CardContent>
