@@ -1,25 +1,39 @@
 /* eslint-disable react/no-children-prop */
-import React from 'react'
+import React, { FC } from 'react'
 import { Card, CardMedia, CardContent, Typography, Avatar, CardHeader, CardActionArea, Stack } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import WarningIcon from '@mui/icons-material/Warning'
 import { pink, red } from '@mui/material/colors'
 import styled from '@emotion/styled'
 
-const ListItem = () => {
-  const ListItemContent = styled(CardContent)({
-    paddingTop: 0,
-    '&:last-child': {
-      paddingBottom: 0,
-    },
-  })
+type Props = {
+  title: string
+  date: string
+  description: string
+  image: string
+  point: number
+  penalty?: boolean
+  onClick: () => void
+}
+
+const ListItemContent = styled(CardContent)({
+  paddingTop: 0,
+  '&:last-child': {
+    paddingBottom: 0,
+  },
+})
+
+const ListItem: FC<Props> = (props) => {
+  const { title, date, description, image, point, penalty, onClick } = props
 
   return (
-    <CardActionArea onClick={() => console.log('click')} sx={{ maxWidth: 345 }}>
+    <CardActionArea onClick={onClick} sx={{ maxWidth: 345, minWidth: 256 }}>
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           component="img"
           height="70"
-          image={`${process.env.PUBLIC_URL!}/img/cosmic1.jpg`}
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          image={`${process.env.PUBLIC_URL!}/img/${image}.jpg`}
           alt="green iguana"
         />
         <CardHeader
@@ -28,17 +42,17 @@ const ListItem = () => {
               TK
             </Avatar>
           }
-          title="月報の提出"
-          subheader="September 14, 2016"
+          title={title}
+          subheader={date}
         />
         <ListItemContent sx={{ px: 2 }}>
           <Typography variant="body2" color="text.secondary">
-            毎月第一営業日中に月報を提出する
+            {description}
           </Typography>
           <Stack direction="row" spacing={0} sx={{ justifyContent: 'right' }}>
-            <FavoriteIcon sx={{ color: pink[500] }} />
+            {penalty ? <WarningIcon sx={{ color: pink[500] }} /> : <FavoriteIcon sx={{ color: pink[500] }} />}
             <Typography gutterBottom component="div">
-              x 30
+              {`x ${point}`}
             </Typography>
           </Stack>
         </ListItemContent>
