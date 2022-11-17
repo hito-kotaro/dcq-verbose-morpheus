@@ -1,5 +1,10 @@
 import React, { FC, ReactElement } from 'react'
-import { Card, CardMedia, Typography, Stack, CardContent, styled } from '@mui/material'
+import Card from '@mui/material/Card'
+import CardMedia from '@mui/material/CardMedia'
+import Typography from '@mui/material/Typography'
+import Stack from '@mui/material/Stack'
+import CardContent from '@mui/material/CardContent'
+import styled from '@mui/material/styles/styled'
 
 type Props = {
   title: string
