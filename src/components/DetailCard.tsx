@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { ReactElement, FC } from 'react'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
@@ -21,10 +21,11 @@ type Props = {
   point: number
   penalty?: boolean
   onClick: () => void
+  forms: ReactElement
 }
 
 const DetailCard: FC<Props> = (props) => {
-  const { title, date, description, image, point, penalty, onClick } = props
+  const { title, date, description, image, point, penalty, onClick, forms } = props
 
   return (
     <Card sx={{ minWidth: 256, maxWidth: '30%' }}>
@@ -55,13 +56,7 @@ const DetailCard: FC<Props> = (props) => {
           </Typography>
         </Stack>
 
-        <TextField multiline fullWidth label="報告内容" placeholder="example" rows={4} variant="standard" />
-        <ButtonGroup variant="contained" fullWidth sx={{ mt: 2 }}>
-          <Button>報告</Button>
-          <Button color="secondary" sx={{ width: '100px' }}>
-            戻る
-          </Button>
-        </ButtonGroup>
+        {forms}
       </CardContent>
     </Card>
   )

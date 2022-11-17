@@ -1,5 +1,6 @@
 import React from 'react'
 import DetailCard from './components/DetailCard'
+import QuestReportForm from './components/QuestReportForm'
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       image="cosmic1"
       point={1}
       onClick={() => console.log('click')}
+      forms={<QuestReportForm />}
     />
   )
 }
