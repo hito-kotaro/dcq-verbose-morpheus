@@ -25,7 +25,7 @@ const DetailCard: FC<Props> = (props) => {
   const { title, date, description, image, point, penalty, forms } = props
 
   return (
-    <Card sx={{ minWidth: 256, maxWidth: '30%' }}>
+    <Card>
       <CardMedia
         component="img"
         height="70"
@@ -54,7 +54,6 @@ const DetailCard: FC<Props> = (props) => {
         </Stack>
 
         <Divider sx={{ my: 1 }} />
-
         {forms}
       </CardContent>
     </Card>

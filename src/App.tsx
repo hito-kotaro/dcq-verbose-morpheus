@@ -1,19 +1,11 @@
 import React from 'react'
-import DetailCard from './components/DetailCard'
-import QuestReportForm from './components/QuestReportForm'
+import AdminLoginPage from './components/pages/AdminLoginPage'
+import UserLoginPage from './components/pages/UserLoginPage'
+// import TwinTemplate from './components/templates/TwinTemplate'
 
 const App = () => {
-  const onCancel = () => console.log('cancel')
-  return (
-    <DetailCard
-      title="タイトル"
-      date="sep, 11, 2022 "
-      description="詳細の説明を入力します。"
-      image="cosmic1"
-      point={1}
-      forms={<QuestReportForm onCancel={onCancel} />}
-    />
-  )
+  // return <AdminLoginPage />
+  return <UserLoginPage />
 }
 
 export default App

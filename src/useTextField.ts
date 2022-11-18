@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 const useTextField = (init?: string) => {
   const [input, setInput] = useState(init ?? '')

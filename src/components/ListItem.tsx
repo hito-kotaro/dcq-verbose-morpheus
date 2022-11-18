@@ -34,8 +34,8 @@ const ListItem: FC<Props> = (props) => {
   const { title, date, description, image, point, penalty, onClick } = props
 
   return (
-    <CardActionArea onClick={onClick} sx={{ maxWidth: 345, minWidth: 256 }}>
-      <Card sx={{ maxWidth: 345 }}>
+    <CardActionArea onClick={onClick} sx={{ minWidth: 256, maxWidth: '100%' }}>
+      <Card sx={{ maxWidth: '100%' }}>
         <CardMedia
           component="img"
           height="70"
