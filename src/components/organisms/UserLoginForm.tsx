@@ -8,28 +8,28 @@ import { ReactComponent as LogoUserLoginMd } from '../../assets/images/logo-user
 
 const UserLoginForm = () => {
   return (
-    <>
+    <Box sx={{ py: 3 }}>
       <Box sx={{ maxHeight: 100, mx: 'auto' }}>
         <LogoUserLoginMd width="100%" height="100%" />
       </Box>
 
       {/* input form */}
-      <Stack direction="column" spacing={4} sx={{ mt: 10 }}>
+      <Stack direction="column" spacing={4} sx={{ mt: 5 }}>
         <UserNameForm />
         <PasswordForm />
       </Stack>
 
       <Stack sx={{ mt: 2 }}>
-        <CheckBoxWithLabel color="#6F7073" label="ログイン状態を維持" />
+        <CheckBoxWithLabel color="#FA9900" label="ログイン状態を維持" />
       </Stack>
 
-      <Stack sx={{ mt: 10 }}>
+      <Stack sx={{ mt: 5 }}>
         <Button variant="contained" color="secondary">
           ログイン
         </Button>
       </Stack>
 
-      <Stack direction="column" spacing={1} sx={{ mt: 10 }}>
+      <Stack direction="column" spacing={1} sx={{ mt: 5 }}>
         <Link
           component="button"
           color="secondary"
@@ -52,7 +52,7 @@ const UserLoginForm = () => {
           パスワードをお忘れですか
         </Link>
       </Stack>
-    </>
+    </Box>
   )
 }
 
