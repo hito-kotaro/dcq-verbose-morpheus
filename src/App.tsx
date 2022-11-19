@@ -1,10 +1,13 @@
 import React from 'react'
-import AdminLoginPage from './components/pages/AdminLoginPage'
-import UserLoginPage from './components/pages/UserLoginPage'
-// import TwinTemplate from './components/templates/TwinTemplate'
+import { BrowserRouter } from 'react-router-dom'
+import Router from './Router'
 
 const App = () => {
-  return <AdminLoginPage />
+  return (
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  )
   // return <UserLoginPage />
 }
 
