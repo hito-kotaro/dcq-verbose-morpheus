@@ -5,8 +5,10 @@ import CheckBoxWithLabel from '../atom/CheckBoxWithLabel'
 import PasswordForm from '../atom/PasswordForm'
 import UserNameForm from '../atom/UserNameForm'
 import { ReactComponent as LogoAdminLoginMd } from '../../assets/images/logo-admin-login-md.svg'
+import useLogin from '../../useLogin'
 
 const AdminLoginForm = () => {
+  const { adminLogin, toUserLoginPage } = useLogin()
   return (
     <Box sx={{ py: 3 }}>
       <Box sx={{ maxHeight: 100, mx: 'auto' }}>
@@ -24,21 +26,14 @@ const AdminLoginForm = () => {
       </Stack>
 
       <Stack sx={{ mt: 5 }}>
-        <Button variant="contained" color="secondary">
+        <Button onClick={adminLogin} variant="contained" color="secondary">
           ログイン
         </Button>
       </Stack>
 
       <Stack direction="column" spacing={1} sx={{ mt: 5 }}>
-        <Link
-          component="button"
-          color="secondary"
-          variant="body2"
-          onClick={() => {
-            console.info("I'm a button.")
-          }}
-        >
-          管理者としてログイン
+        <Link component="button" color="secondary" variant="body2" onClick={toUserLoginPage}>
+          一般ユーザでログイン
         </Link>
 
         <Link
