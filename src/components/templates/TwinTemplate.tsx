@@ -4,10 +4,12 @@ import React, { FC, ReactElement } from 'react'
 import { Box, Stack, styled, alpha } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import bg from '../../assets/images/bg-user-login-sm.png'
+import MobileUserLoginForm from '../organisms/MobileUserLoginForm'
 
 type Props = {
   leftContent: ReactElement
   rightContent: ReactElement
+  xsContent: ReactElement
 }
 
 const ImageBox = styled(Box)({
@@ -18,21 +20,23 @@ const ImageBox = styled(Box)({
 })
 
 const TwinTemplate: FC<Props> = (props) => {
-  const { leftContent, rightContent } = props
+  const { leftContent, rightContent, xsContent } = props
   return (
     <Box sx={{ height: '100vh' }}>
       <Stack direction="row" justifyContent="space-between" sx={{ height: '100%' }}>
         {/* mobile */}
         <Box bgcolor="black" sx={{ width: '100%', display: { xs: 'block', md: 'none' } }}>
           {/* FixMe: ここをコンポーネントにするとレンダリングできなくなる */}
-          <ImageBox sx={{ width: '100%', pt: 5 }}>
+          {xsContent}
+          {/* <MobileUserLoginForm /> */}
+          {/* <ImageBox sx={{ width: '100%', pt: 5 }}>
             <Box
               bgcolor={alpha(grey[300], 0.7)}
               sx={{ width: '80%', mx: 'auto', mt: 5, borderRadius: '20px', backdropFilter: 'blur(3px)' }}
             >
               {rightContent}
             </Box>
-          </ImageBox>
+          </ImageBox> */}
         </Box>
 
         {/* left side */}

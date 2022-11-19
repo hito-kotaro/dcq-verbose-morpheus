@@ -1,25 +1,26 @@
 import React from 'react'
-import { Box, styled, alpha } from '@mui/material'
-import bg from '../../assets/images/bg-user-login-sm.png'
-import UserLoginForm from './UserLoginForm'
+import { alpha, Box, styled } from '@mui/material'
+import bg from '../../assets/images/bg-admin-login-sm.png'
+import AdminLoginForm from './AdminLoginForm'
 
-const MobileUserLoginForm = () => {
+const MobileAdminLoginForm = () => {
   const ImageBox = styled(Box)({
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     backgroundImage: `url(${bg})`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
   })
+
   return (
     <ImageBox sx={{ width: '100%', pt: 5 }}>
       <Box
         bgcolor={alpha('#FFFFFF', 0.8)}
         sx={{ width: '80%', mx: 'auto', mt: 5, px: 2, borderRadius: '20px', backdropFilter: 'blur(3px)' }}
       >
-        <UserLoginForm />
+        <AdminLoginForm />
       </Box>
     </ImageBox>
   )
 }
 
-export default MobileUserLoginForm
+export default MobileAdminLoginForm

@@ -3,6 +3,7 @@ import { Box, styled } from '@mui/material'
 import bg from '../../assets/images/bg-user-login-md.jpg'
 import TwinTemplate from '../templates/TwinTemplate'
 import UserLoginForm from '../organisms/UserLoginForm'
+import MobileUserLoginForm from '../organisms/MobileUserLoginForm'
 
 const ImageBox = styled(Box)({
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -25,6 +26,7 @@ const UserLoginPage = () => {
           </Box>
         </Box>
       }
+      xsContent={<MobileUserLoginForm />}
     />
   )
 }

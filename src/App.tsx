@@ -4,8 +4,8 @@ import UserLoginPage from './components/pages/UserLoginPage'
 // import TwinTemplate from './components/templates/TwinTemplate'
 
 const App = () => {
-  // return <AdminLoginPage />
-  return <UserLoginPage />
+  return <AdminLoginPage />
+  // return <UserLoginPage />
 }
 
 export default App

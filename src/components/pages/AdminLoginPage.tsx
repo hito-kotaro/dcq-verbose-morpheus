@@ -2,6 +2,7 @@ import { Box, styled } from '@mui/material'
 import React from 'react'
 import bg from '../../assets/images/bg-admin-login-md.jpg'
 import AdminLoginForm from '../organisms/AdminLoginForm'
+import MobileAdminLoginForm from '../organisms/MobileAdminLoginForm'
 import TwinTemplate from '../templates/TwinTemplate'
 
 const ImageBox = styled(Box)({
@@ -25,6 +26,7 @@ const AdminLoginPage = () => {
           <ImageBox sx={{ width: '100%', height: '100%', opacity: 0.6 }} />
         </Box>
       }
+      xsContent={<MobileAdminLoginForm />}
     />
   )
 }
