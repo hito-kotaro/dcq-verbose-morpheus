@@ -1,17 +1,27 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { TextField, InputAdornment } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import useTextField from '../../useTextField'
+import type { textInputHandler } from '../../useTextField'
 
-const UserNameForm = () => {
-  const form = useTextField()
+type Props = {
+  handler: textInputHandler
+  onKeyDown: () => void
+}
+
+const UserNameForm: FC<Props> = (props) => {
+  const { handler, onKeyDown } = props
 
   return (
     <TextField
       label="UserName"
-      value={form.input}
-      onChange={form.onChange}
+      value={handler.input}
+      onChange={handler.onChange}
       InputProps={{
+        onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => {
+          if (e.code === 'Enter') {
+            onKeyDown()
+          }
+        },
         startAdornment: (
           <InputAdornment position="start">
             <AccountCircleIcon />

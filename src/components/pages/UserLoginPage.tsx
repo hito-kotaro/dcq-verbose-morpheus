@@ -20,8 +20,8 @@ const UserLoginPage = () => {
         </Box>
       }
       rightContent={
-        <Box sx={{}}>
-          <Box sx={{ width: '70%', mx: 'auto' }}>
+        <Box sx={{ pt: 10 }}>
+          <Box sx={{ width: '60%', mx: 'auto' }}>
             <UserLoginForm />
           </Box>
         </Box>

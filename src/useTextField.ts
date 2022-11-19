@@ -1,5 +1,11 @@
 import { ChangeEvent, useState } from 'react'
 
+export type textInputHandler = {
+  input: string
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  clear: () => void
+}
+
 const useTextField = (init?: string) => {
   const [input, setInput] = useState(init ?? '')
 
