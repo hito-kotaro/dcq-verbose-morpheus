@@ -4,6 +4,7 @@ import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import useToggle from '../useToggle'
+import { NAVBAR_HEIGHT } from '../LayoutData'
 
 const Styledtoolbar = styled(Toolbar)({
   display: 'flex',
@@ -31,7 +32,7 @@ const UserBox = styled(Box)(({ theme }) => ({
 const Navbar = () => {
   const { isOpen, setIsOpen, toggle } = useToggle()
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{ height: NAVBAR_HEIGHT }}>
       <Styledtoolbar>
         <Typography variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>
           DCQ DEV

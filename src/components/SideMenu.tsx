@@ -1,50 +1,27 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import DashboardIcon from '@mui/icons-material/Dashboard'
-import AssignmentLateIcon from '@mui/icons-material/AssignmentLate'
-import AnnouncementIcon from '@mui/icons-material/Announcement'
-import ReviewsIcon from '@mui/icons-material/Reviews'
+import { SideMenuData, SideMenuDataType } from '../SideMenuData'
 
-const SideMenu = () => {
+type Props = {
+  menu: SideMenuDataType[]
+}
+
+const SideMenu: FC<Props> = (props) => {
+  const { menu } = props
   return (
-    <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
-      <Box position="fixed">
+    <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'none', md: 'block' }, boxShadow: 3 }}>
+      <Box position="fixed" sx={{ width: { md: 200, xl: 300 } }}>
         <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <AssignmentLateIcon />
-              </ListItemIcon>
-              <ListItemText primary="Quests" />
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <ReviewsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Requests" />
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <AnnouncementIcon />
-              </ListItemIcon>
-              <ListItemText primary="Penalties" />
-            </ListItemButton>
-          </ListItem>
+          {menu.map((data: SideMenuDataType) => {
+            return (
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>{data.icon}</ListItemIcon>
+                  <ListItemText primary={data.title} />
+                </ListItemButton>
+              </ListItem>
+            )
+          })}
         </List>
       </Box>
     </Box>
