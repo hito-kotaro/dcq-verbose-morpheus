@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { Button, Stack } from '@mui/material'
-import PasswordForm from '../atom/PasswordForm'
-import UserNameForm from '../atom/UserNameForm'
+import PasswordForm from '../atoms/PasswordForm'
+import UserNameForm from '../atoms/UserNameForm'
 import useTextField from '../../useTextField'
-import CheckBoxWithLabel from '../atom/CheckBoxWithLabel'
+import CheckBoxWithLabel from '../atoms/CheckBoxWithLabel'
 
 type Props = {
   login: (name: string, pwd: string) => void

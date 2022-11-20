@@ -2,9 +2,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { Box, Stack, Button, Link } from '@mui/material'
-import CheckBoxWithLabel from '../atom/CheckBoxWithLabel'
-import PasswordForm from '../atom/PasswordForm'
-import UserNameForm from '../atom/UserNameForm'
+import CheckBoxWithLabel from '../atoms/CheckBoxWithLabel'
+import PasswordForm from '../atoms/PasswordForm'
+import UserNameForm from '../atoms/UserNameForm'
 import { ReactComponent as LogoUserLoginMd } from '../../assets/images/logo-user-login-md.svg'
 import useLogin from '../../useLogin'
 import LoginForm from '../molecules/LoginForm'

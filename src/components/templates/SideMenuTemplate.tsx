@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { FC, ReactElement } from 'react'
 import { Box, Stack } from '@mui/material'
 import Navbar from '../Navbar'
 import SideMenu from '../SideMenu'
-import MainPanel from '../MainPanel'
-import { SideMenuData } from '../../SideMenuData'
+import { SideMenuDataType } from '../../SideMenuData'
 
-const SideMenuTemplate = () => {
+type Props = {
+  menu: SideMenuDataType[]
+  mainContent: ReactElement
+}
+
+const SideMenuTemplate: FC<Props> = (props) => {
+  const { menu, mainContent } = props
   return (
     <Box>
       <Navbar />
       <Stack direction="row" spacing={2} justifyContent="space-between">
-        <SideMenu menu={SideMenuData} />
-        <Box flex={5}>
-          <MainPanel />
-        </Box>
+        <SideMenu menu={menu} />
+        <Box flex={5}>{mainContent}</Box>
       </Stack>
     </Box>
   )

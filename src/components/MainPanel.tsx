@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box } from '@mui/material'
 import ListItem from './ListItem'
+import { quests } from '../testData/QuestData'
 
 const MainPanel = () => {
   const testData = [
@@ -69,8 +70,8 @@ const MainPanel = () => {
     // },
   ]
   return (
-    <Box flex={2} p={2} alignContent="center" sx={{ height: '90vh' }}>
-      {testData.map((d) => {
+    <Box p={2} alignContent="center">
+      {quests.map((d) => {
         return (
           <Box sx={{ my: 2 }}>
             <ListItem

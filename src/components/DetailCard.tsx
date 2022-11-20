@@ -18,7 +18,7 @@ type Props = {
   image: string
   point: number
   penalty?: boolean
-  forms: ReactElement
+  forms?: ReactElement
 }
 
 const DetailCard: FC<Props> = (props) => {
@@ -43,7 +43,7 @@ const DetailCard: FC<Props> = (props) => {
         subheader={date}
       />
       <CardContent sx={{ p: 2 }}>
-        <Box sx={{ overflow: 'scroll', height: '20vh' }}>
+        <Box sx={{ overflow: 'scroll', height: '10vh' }}>
           <Typography variant="body2" color="text.secondary">
             {description}
           </Typography>
@@ -56,7 +56,7 @@ const DetailCard: FC<Props> = (props) => {
         </Stack>
 
         <Divider sx={{ my: 3 }} />
-        {forms}
+        {forms || ''}
       </CardContent>
     </Card>
   )

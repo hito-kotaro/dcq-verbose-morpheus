@@ -32,7 +32,7 @@ const UserBox = styled(Box)(({ theme }) => ({
 const Navbar = () => {
   const { isOpen, setIsOpen, toggle } = useToggle()
   return (
-    <AppBar position="sticky" sx={{ height: NAVBAR_HEIGHT }}>
+    <AppBar position="fixed" sx={{ height: NAVBAR_HEIGHT }}>
       <Styledtoolbar>
         <Typography variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>
           DCQ DEV
