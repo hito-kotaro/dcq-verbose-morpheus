@@ -12,7 +12,7 @@ const CardList: FC<Props> = (props) => {
     <Box p={2} alignContent="center">
       {data.map((d: CardListItemType) => {
         return (
-          <Box sx={{ my: 2 }}>
+          <Box key={d.id} sx={{ my: 2 }}>
             <CardListItem card={d} />
           </Box>
         )

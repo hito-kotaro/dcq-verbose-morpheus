@@ -14,6 +14,7 @@ import { pink, red } from '@mui/material/colors'
 import styled from '@emotion/styled'
 
 export type CardListItemType = {
+  id: number
   title: string
   date: string
   description: string

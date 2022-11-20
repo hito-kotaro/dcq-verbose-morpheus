@@ -5,7 +5,6 @@ import SplitTemplate from '../../templates/SplitTemplate'
 import DetailCard from '../../DetailCard'
 import CardList from '../../molecules/CardList'
 import { quests } from '../../../testData/QuestData'
-import MainPanel from '../../MainPanel'
 import QuestReportForm from '../../QuestReportForm'
 
 const Quest = () => {
@@ -22,6 +21,8 @@ const Quest = () => {
   )
 
   useEffect(() => {
+    console.log('Environment!')
+    console.log(import.meta.env)
     setMain(<CardList data={quests} />)
   }, [])
 

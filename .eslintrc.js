@@ -32,7 +32,10 @@ module.exports = {
     'react/jsx-props-no-spreading': 'warn',
     'react/function-component-definition': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
     'import/prefer-default-export': 'off',
+
     'import/extensions': [
       'error',
       {

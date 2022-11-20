@@ -1,6 +1,6 @@
 export const quests = [
   {
-    id: '1',
+    id: 1,
     title: 'クエストA',
     date: 'Nov,18,2022',
     description: 'ここにクエストの説明が入ります',
@@ -9,7 +9,7 @@ export const quests = [
     onClick: () => console.log('click'),
   },
   {
-    id: '2',
+    id: 2,
     title: 'クエストB',
     date: 'Nov,18,2022',
     description: 'ここにクエストの説明が入ります',
@@ -18,7 +18,7 @@ export const quests = [
     onClick: () => console.log('click'),
   },
   {
-    id: '3',
+    id: 3,
     title: 'クエストB',
     date: 'Nov,18,2022',
     description: 'ここにクエストの説明が入ります',
@@ -27,7 +27,7 @@ export const quests = [
     onClick: () => console.log('click'),
   },
   {
-    id: '4',
+    id: 4,
     title: 'クエストD',
     date: 'Nov,18,2022',
     description: 'ここにクエストの説明が入ります',
@@ -36,7 +36,7 @@ export const quests = [
     onClick: () => console.log('click'),
   },
   {
-    id: '5',
+    id: 5,
     title: 'クエストE',
     date: 'Nov,18,2022',
     description: 'ここにクエストの説明が入ります',
@@ -45,7 +45,7 @@ export const quests = [
     onClick: () => console.log('click'),
   },
   {
-    id: '6',
+    id: 6,
     title: 'クエストF',
     date: 'Nov,18,2022',
     description: 'ここにクエストの説明が入ります',
@@ -54,7 +54,7 @@ export const quests = [
     onClick: () => console.log('click'),
   },
   {
-    id: '7',
+    id: 7,
     title: 'クエストG',
     date: 'Nov,18,2022',
     description: 'ここにクエストの説明が入ります',
