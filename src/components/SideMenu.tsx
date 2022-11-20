@@ -7,8 +7,8 @@ import ReviewsIcon from '@mui/icons-material/Reviews'
 
 const SideMenu = () => {
   return (
-    <Box bgcolor="skyblue" flex={1} p={2} sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
-      <Box position="fixed" bgcolor="red">
+    <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
+      <Box position="fixed">
         <List>
           <ListItem disablePadding>
             <ListItemButton>

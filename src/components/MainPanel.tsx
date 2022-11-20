@@ -69,7 +69,7 @@ const MainPanel = () => {
     },
   ]
   return (
-    <Box bgcolor="darkorange" flex={2} p={2} alignContent="center">
+    <Box flex={2} p={2} alignContent="center" sx={{ height: '100%' }}>
       {testData.map((d) => {
         return (
           <Box sx={{ my: 2 }}>

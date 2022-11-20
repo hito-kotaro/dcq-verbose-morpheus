@@ -12,7 +12,7 @@ type Props = {
 const QuestReportForm: FC<Props> = (props) => {
   const { onCancel } = props
 
-  const multiline = 8
+  const multiline = 5
   const form = useTextField()
   return (
     <Box>

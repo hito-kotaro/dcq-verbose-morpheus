@@ -40,7 +40,7 @@ const ListItem: FC<Props> = (props) => {
           component="img"
           height="70"
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          image={`${process.env.PUBLIC_URL!}/img/${image}.jpg`}
+          image={`../../public/img/${image}.jpg`}
           alt="green iguana"
         />
         <CardHeader
