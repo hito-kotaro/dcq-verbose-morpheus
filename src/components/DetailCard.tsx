@@ -25,7 +25,7 @@ const DetailCard: FC<Props> = (props) => {
   const { title, date, description, image, point, penalty, forms } = props
 
   return (
-    <Card sx={{ overflow: 'scroll', height: '85vh' }}>
+    <Card sx={{ overflow: 'scroll', height: '87vh' }}>
       <CardMedia
         component="img"
         height="70"
