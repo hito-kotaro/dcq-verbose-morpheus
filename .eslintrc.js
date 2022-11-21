@@ -3,15 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'airbnb/hooks',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'prettier',
-    'plugin:storybook/recommended',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'plugin:storybook/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -26,15 +18,16 @@ module.exports = {
   ignorePatterns: ['.eslintrc.js'],
   rules: {
     'arrow-body-style': 'off',
+    'no-unused-vars': 'warn',
     'no-use-before-define': 'off',
     'react/require-default-props': 'off',
     'react/no-unused-prop-types': 'warn',
     'react/jsx-props-no-spreading': 'warn',
     'react/function-component-definition': 'off',
-    '@typescript-eslint/no-use-before-define': 'off',
-    '@typescript-eslint/no-unsafe-member-access': 'off',
-    '@typescript-eslint/no-misused-promises': 'off',
-    '@typescript-eslint/no-unsafe-assignment': 'warn',
+    // '@typescript-eslint/no-use-before-define': 'off',
+    // '@typescript-eslint/no-unsafe-member-access': 'off',
+    // '@typescript-eslint/no-misused-promises': 'off',
+    // '@typescript-eslint/no-unsafe-assignment': 'warn',
     'import/prefer-default-export': 'off',
 
     'import/extensions': [
