@@ -12,17 +12,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import WarningIcon from '@mui/icons-material/Warning'
 import { pink, red } from '@mui/material/colors'
 import styled from '@emotion/styled'
-
-export type CardListItemType = {
-  id: number
-  title: string
-  date: string
-  description: string
-  image: string
-  point: number
-  penalty?: boolean
-  onClick: () => void
-}
+import { CardListItemType } from './CardListItemType'
 
 type Props = {
   card: CardListItemType
