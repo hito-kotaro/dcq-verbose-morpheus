@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { AppBar, Box, Badge, styled, Toolbar, Typography, Avatar, Menu, MenuItem } from '@mui/material'
-import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates'
+import MenuIcon from '@mui/icons-material/Menu'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
-import useToggle from '../useToggle'
+import useToggle, { useToggleType } from '../useToggle'
 import { NAVBAR_HEIGHT } from '../LayoutData'
 
 const Styledtoolbar = styled(Toolbar)({
@@ -29,7 +29,12 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }))
 
-const Navbar = () => {
+type Props = {
+  menuHandler: useToggleType
+}
+
+const Navbar: FC<Props> = (props) => {
+  const { menuHandler } = props
   const { isOpen, setIsOpen, toggle } = useToggle()
   return (
     <AppBar position="fixed" sx={{ height: NAVBAR_HEIGHT }}>
@@ -37,7 +42,7 @@ const Navbar = () => {
         <Typography variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>
           DCQ DEV
         </Typography>
-        <TipsAndUpdatesIcon sx={{ display: { xs: 'block', sm: 'none' } }} />
+        <MenuIcon sx={{ display: { xs: 'block', md: 'none' } }} />
 
         <Icons>
           <Badge badgeContent={0} color="secondary">

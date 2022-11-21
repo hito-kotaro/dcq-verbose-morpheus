@@ -1,10 +1,10 @@
+import { Box, Stack, Drawer } from '@mui/material'
 import React, { FC, ReactElement } from 'react'
-import Box from '@mui/material/Box/Box'
-import Stack from '@mui/material/Stack/Stack'
-import Navbar from '../Navbar'
+import { CONTENTS_PADDING } from '../../LayoutData'
 import { SideMenuDataType } from '../../SideMenuData'
+import useToggle from '../../useToggle'
+import Navbar from '../Navbar'
 import SideMenu from '../SideMenu'
-import { CONTENTS_MARGIN } from '../../LayoutData'
 
 type Props = {
   menu: SideMenuDataType[]
@@ -14,27 +14,63 @@ type Props = {
 
 const SplitTemplate: FC<Props> = (props) => {
   const { menu, mainPanel, subPanel } = props
+  const menuHandler = useToggle()
   return (
     <Box>
-      <Navbar />
+      <Navbar menuHandler={menuHandler} />
+
       <Stack direction="row" spacing={2} justifyContent="space-between">
         {/* side menu */}
-        <Box flex={1} sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
-          <Box position="fixed" sx={{ mt: CONTENTS_MARGIN, width: { md: 200, xl: 300 } }}>
-            <SideMenu menu={menu} />
-          </Box>
+        <Box
+          flex={1}
+          sx={{
+            display: { xs: 'none', md: 'block' },
+            height: '100vh',
+            pt: CONTENTS_PADDING,
+            overflowY: 'scroll',
+            boxShadow: 3,
+          }}
+        >
+          <SideMenu menu={menu} />
         </Box>
 
-        {/* main panel */}
-        <Box flex={2} sx={{ pt: CONTENTS_MARGIN, height: '95vh' }}>
+        <Drawer open={menuHandler.isOpen} onClose={menuHandler.toggle} sx={{ display: { xs: 'block', md: 'none' } }}>
+          <Box width={240}>
+            <SideMenu menu={menu} />
+          </Box>
+        </Drawer>
+
+        <Box
+          flex={2}
+          sx={{
+            height: '100vh',
+            pt: CONTENTS_PADDING,
+            overflow: 'scroll',
+            '& ::-webkit-scrollbar': {
+              display: 'none',
+            },
+            '& :hover': {
+              '::-webkit-scrollbar': {
+                display: 'inline',
+              },
+            },
+          }}
+        >
           {mainPanel}
         </Box>
 
-        {/* sub panel */}
-        <Box flex={2} pt={2} px={3} sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
-          <Box position="fixed" sx={{ mt: CONTENTS_MARGIN, width: { md: 300, lg: 430, xl: 700 }, height: '85vh' }}>
-            {subPanel}
-          </Box>
+        <Box
+          flex={2}
+          sx={{
+            display: { xs: 'none', md: 'block' },
+            height: '100vh',
+            py: CONTENTS_PADDING,
+            px: 3,
+            overflowY: 'scroll',
+            boxShadow: 3,
+          }}
+        >
+          {subPanel}
         </Box>
       </Stack>
     </Box>

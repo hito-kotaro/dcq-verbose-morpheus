@@ -18,11 +18,15 @@ const useLogin = () => {
 
   const userLogin = async (user: string, pwd: string) => {
     const instance = create()
+    console.log({ name: user, password: pwd })
+
     try {
       const result: AxiosResponse = await instance.post('/auth/user', { name: user, password: pwd })
+      console.log('test')
       localStorage.setItem('token', String(result.data.token))
       navigate('/user')
     } catch (e: any) {
+      console.log(e)
       errorHandler(Number(e.response.status))
     }
   }
