@@ -3,11 +3,13 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { create } from '../../../Repositories/Repository'
 import { questType } from '../../../Repositories/types/QuestType'
+import useToggle from '../../../useToggle'
 import { convDate } from '../../../utils/convDate'
 import { CardListItemType } from '../../atoms/CardListItem/CardListItemType'
 
 const useQuest = () => {
   // const [quests, setQuests] = useState<questType[]>([])
+  const modalState = useToggle()
   const [list, setList] = useState<CardListItemType[]>([])
   const [pick, setPick] = useState<questType>({
     id: 0,
@@ -42,6 +44,27 @@ const useQuest = () => {
     }
   }
 
+  const onClickCard = (d: questType) => {
+    console.log(d)
+    setPick(d)
+    modalState.toggle()
+  }
+
+  // DetailCardの戻るボタン
+  const onClickCancel = () => {
+    // Fix: 後でEmptyStateを作る
+    setPick({
+      id: 0,
+      title: '',
+      description: '',
+      reward: 0,
+      date: '',
+      owner_id: 0,
+      owner: '',
+      example: '',
+    })
+    modalState.setIsOpen(false)
+  }
   // convert Quest to ListCard
   const convQuest2List = (data: questType[]) => {
     const listData: CardListItemType[] = data.map((d: questType) => {
@@ -52,14 +75,14 @@ const useQuest = () => {
         description: d.description,
         image: 'cosmic1',
         point: d.reward,
-        onClick: () => setPick(d),
+        onClick: () => onClickCard(d),
       }
     })
 
     setList(listData)
   }
 
-  return { fetch, list, pick }
+  return { fetch, list, pick, modalState, onClickCancel }
 }
 
 export default useQuest

@@ -6,6 +6,7 @@ import CardActionArea from '@mui/material/CardActionArea'
 import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
 import CardMedia from '@mui/material/CardMedia'
+import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import FavoriteIcon from '@mui/icons-material/Favorite'
@@ -29,7 +30,7 @@ const CardListItem: FC<Props> = (props) => {
   const { card } = props
 
   return (
-    <CardActionArea onClick={card.onClick} sx={{ minWidth: 256, maxWidth: '100%' }}>
+    <CardActionArea onClick={card.onClick} sx={{ minWidth: 256, maxWidth: '100%', p: 1 }}>
       <Card sx={{ maxWidth: '100%' }}>
         <CardMedia
           component="img"

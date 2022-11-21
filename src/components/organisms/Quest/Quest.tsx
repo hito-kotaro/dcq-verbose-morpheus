@@ -4,12 +4,11 @@ import { SideMenuData } from '../../../SideMenuData'
 import SplitTemplate from '../../templates/SplitTemplate'
 import DetailCard from '../../DetailCard'
 import CardList from '../../molecules/CardList'
-import { quests } from '../../../testData/QuestData'
 import useQuest from './useQuest'
 import QuestReportForm from '../../QuestReportForm'
 
 const Quest = () => {
-  const { fetch, pick, list } = useQuest()
+  const { fetch, pick, list, modalState, onClickCancel } = useQuest()
   const [main, setMain] = useState(<CardList data={[]} />)
   const [sub, setSub] = useState(
     <DetailCard
@@ -34,7 +33,7 @@ const Quest = () => {
         description={pick.description}
         image="cosmic2"
         point={pick.reward}
-        forms={<QuestReportForm onCancel={() => {}} />}
+        forms={<QuestReportForm onCancel={onClickCancel} />}
       />
     )
   }, [pick])
@@ -42,7 +41,7 @@ const Quest = () => {
     setMain(<CardList data={list} />)
   }, [list])
 
-  return <SplitTemplate menu={SideMenuData} mainPanel={<Box>{main}</Box>} subPanel={sub} />
+  return <SplitTemplate menu={SideMenuData} mainPanel={<Box>{main}</Box>} subPanel={sub} modalState={modalState} />
 }
 
 export default Quest
