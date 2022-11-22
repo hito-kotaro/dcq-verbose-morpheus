@@ -2,22 +2,24 @@ import React, { FC } from 'react'
 import LockIcon from '@mui/icons-material/Lock'
 import { VisibilityOff, Visibility } from '@mui/icons-material'
 import { FormControl, InputLabel, Input, InputAdornment, IconButton } from '@mui/material'
-import usePasswordForm from './usePasswordForm'
 import type { textInputHandler } from '../../useTextField'
+import useToggle from '../../useToggle'
 
 type Props = {
   handler: textInputHandler
   onKeyDown: () => void
 }
+
 const PasswordForm: FC<Props> = (props) => {
   const { handler, onKeyDown } = props
-  const { isShow, toggle } = usePasswordForm()
+  const { isOpen, toggle } = useToggle()
+
   return (
     <FormControl variant="standard">
       <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
       <Input
         id="standard-adornment-password"
-        type={isShow ? 'text' : 'password'}
+        type={isOpen ? 'text' : 'password'}
         value={handler.input}
         onChange={handler.onChange}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -33,7 +35,7 @@ const PasswordForm: FC<Props> = (props) => {
         endAdornment={
           <InputAdornment position="end">
             <IconButton aria-label="toggle password visibility" onClick={toggle}>
-              {isShow ? <VisibilityOff /> : <Visibility />}
+              {isOpen ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
         }

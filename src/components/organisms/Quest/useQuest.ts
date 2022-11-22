@@ -2,25 +2,15 @@ import { AxiosResponse } from 'axios'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { create } from '../../../Repositories/Repository'
-import { questType } from '../../../Repositories/types/QuestType'
+import { emptyQuest, questType } from '../../../Repositories/types/QuestType'
 import useToggle from '../../../useToggle'
 import { convDate } from '../../../utils/convDate'
-import { CardListItemType } from '../../atoms/CardListItem/CardListItemType'
+import { CardListItemType } from '../../atoms/CardListItem'
 
 const useQuest = () => {
-  // const [quests, setQuests] = useState<questType[]>([])
   const modalState = useToggle()
   const [list, setList] = useState<CardListItemType[]>([])
-  const [pick, setPick] = useState<questType>({
-    id: 0,
-    title: '',
-    description: '',
-    reward: 0,
-    date: '',
-    owner_id: 0,
-    owner: '',
-    example: '',
-  })
+  const [pick, setPick] = useState<questType>(emptyQuest)
 
   const errorHandler = (code: number) => {
     if (code === 500) {
@@ -38,14 +28,12 @@ const useQuest = () => {
     try {
       const result: AxiosResponse = await instance.get('/quest')
       convQuest2List(result.data.quests)
-      // setQuests(result.data.quests)
     } catch (e: any) {
       errorHandler(Number(e.response.status))
     }
   }
 
   const onClickCard = (d: questType) => {
-    console.log(d)
     setPick(d)
     modalState.toggle()
   }
@@ -53,16 +41,7 @@ const useQuest = () => {
   // DetailCardの戻るボタン
   const onClickCancel = () => {
     // Fix: 後でEmptyStateを作る
-    setPick({
-      id: 0,
-      title: '',
-      description: '',
-      reward: 0,
-      date: '',
-      owner_id: 0,
-      owner: '',
-      example: '',
-    })
+    setPick(emptyQuest)
     modalState.setIsOpen(false)
   }
   // convert Quest to ListCard

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { AppBar, Box, Badge, styled, Toolbar, Typography, Avatar, Menu, MenuItem, IconButton } from '@mui/material'
+import { AppBar, Box, Badge, styled, Toolbar, Typography, Avatar, Menu, MenuItem } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { SideMenuDataType } from '../SideMenuData'
 
 type Props = {
@@ -13,7 +13,7 @@ const SideMenu: FC<Props> = (props) => {
       {menu.map((data: SideMenuDataType) => {
         return (
           <ListItem disablePadding key={data.id}>
-            <ListItemButton onClick={() => console.log(data.title)}>
+            <ListItemButton onClick={() => {}}>
               <ListItemIcon>{data.icon}</ListItemIcon>
               <ListItemText primary={data.title} />
             </ListItemButton>

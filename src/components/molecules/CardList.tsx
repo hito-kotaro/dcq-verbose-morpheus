@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Box } from '@mui/material'
-import CardListItem from '../atoms/CardListItem/CardListItem'
-import { CardListItemType } from '../atoms/CardListItem/CardListItemType'
+import CardListItem, { CardListItemType } from '../atoms/CardListItem'
 
 type Props = {
   data: CardListItemType[]

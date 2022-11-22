@@ -1,4 +1,4 @@
-import { Box, Stack, Drawer, Backdrop, Fade, Modal, Typography, styled } from '@mui/material'
+import { Box, Stack, Drawer, Fade, Modal, styled } from '@mui/material'
 import React, { FC, ReactElement } from 'react'
 import { CONTENTS_PADDING } from '../../LayoutData'
 import { SideMenuDataType } from '../../SideMenuData'

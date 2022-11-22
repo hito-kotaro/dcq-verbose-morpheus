@@ -6,6 +6,7 @@ import useTextField from '../../useTextField'
 import CheckBoxWithLabel from '../atoms/CheckBoxWithLabel'
 
 type Props = {
+  // eslint-disable-next-line no-unused-vars
   login: (name: string, pwd: string) => void
 }
 

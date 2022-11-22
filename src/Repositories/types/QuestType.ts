@@ -8,3 +8,14 @@ export type questType = {
   owner: string
   example: string
 }
+
+export const emptyQuest: questType = {
+  id: 0,
+  title: '',
+  description: '',
+  reward: 0,
+  date: '',
+  owner_id: 0,
+  owner: '',
+  example: '',
+}

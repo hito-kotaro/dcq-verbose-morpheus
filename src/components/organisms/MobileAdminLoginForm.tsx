@@ -5,7 +5,6 @@ import AdminLoginForm from './AdminLoginForm'
 
 const MobileAdminLoginForm = () => {
   const ImageBox = styled(Box)({
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     backgroundImage: `url(${bg})`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',

@@ -1,8 +1,6 @@
 import React, { FC } from 'react'
-import Box from '@mui/material/Box/Box'
-import Button from '@mui/material/Button'
-import ButtonGroup from '@mui/material/ButtonGroup'
-import TextField from '@mui/material/TextField'
+import { Box, TextField, ButtonGroup, Button } from '@mui/material'
+
 import useTextField from '../useTextField'
 
 type Props = {
@@ -25,7 +23,6 @@ const QuestReportForm: FC<Props> = (props) => {
         placeholder="example"
         rows={multiline}
         variant="standard"
-        // inputProps={{ maxLength }}
       />
       <ButtonGroup variant="contained" fullWidth sx={{ mt: 2 }}>
         {/* ここのonCickは後ほどApiのアクセスになる */}

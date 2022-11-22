@@ -7,7 +7,6 @@ import MobileAdminLoginForm from '../organisms/MobileAdminLoginForm'
 import TwinTemplate from '../templates/TwinTemplate'
 
 const ImageBox = styled(Box)({
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   backgroundImage: `url(${bg})`,
   backgroundSize: 'cover',
 })

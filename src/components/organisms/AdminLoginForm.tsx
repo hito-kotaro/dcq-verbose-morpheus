@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { Box, Stack, Link } from '@mui/material'
+import { Box, Stack, Button } from '@mui/material'
 import { ReactComponent as LogoAdminLoginMd } from '../../assets/images/logo-admin-login-md.svg'
 import useLogin from '../../useLogin'
 import LoginForm from '../molecules/LoginForm'
@@ -17,20 +16,8 @@ const AdminLoginForm = () => {
       <LoginForm login={adminLogin} />
 
       <Stack direction="column" spacing={1} sx={{ mt: 5 }}>
-        <Link component="button" color="secondary" variant="body2" onClick={toUserLoginPage}>
-          一般ユーザでログイン
-        </Link>
-
-        <Link
-          component="button"
-          color="secondary"
-          variant="body2"
-          onClick={() => {
-            console.info("I'm a button.")
-          }}
-        >
-          パスワードをお忘れですか
-        </Link>
+        <Button onClick={toUserLoginPage}>一般ユーザでログイン</Button>
+        <Button onClick={() => {}}>パスワードをお忘れですか？</Button>
       </Stack>
     </Box>
   )

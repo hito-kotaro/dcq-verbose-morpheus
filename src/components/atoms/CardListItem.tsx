@@ -1,22 +1,33 @@
 /* eslint-disable react/no-children-prop */
 import React, { FC } from 'react'
-import Avatar from '@mui/material/Avatar'
-import Card from '@mui/material/Card'
-import CardActionArea from '@mui/material/CardActionArea'
-import CardContent from '@mui/material/CardContent'
-import CardHeader from '@mui/material/CardHeader'
-import CardMedia from '@mui/material/CardMedia'
-import Box from '@mui/material/Box'
-import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
+import {
+  CardContent,
+  CardActionArea,
+  Card,
+  CardMedia,
+  CardHeader,
+  Avatar,
+  Typography,
+  Stack,
+  styled,
+} from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import WarningIcon from '@mui/icons-material/Warning'
 import { pink, red } from '@mui/material/colors'
-import styled from '@emotion/styled'
-import { CardListItemType } from './CardListItemType'
 
 type Props = {
   card: CardListItemType
+}
+
+export type CardListItemType = {
+  id: number
+  title: string
+  date: string
+  description: string
+  image: string
+  point: number
+  penalty?: boolean
+  onClick: () => void
 }
 
 const ListItemContent = styled(CardContent)({
@@ -32,13 +43,7 @@ const CardListItem: FC<Props> = (props) => {
   return (
     <CardActionArea onClick={card.onClick} sx={{ minWidth: 256, maxWidth: '100%', p: 1 }}>
       <Card sx={{ maxWidth: '100%' }}>
-        <CardMedia
-          component="img"
-          height="70"
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          image={`../../public/img/${card.image}.jpg`}
-          alt="green iguana"
-        />
+        <CardMedia component="img" height="70" image={`../../public/img/${card.image}.jpg`} alt="green iguana" />
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">

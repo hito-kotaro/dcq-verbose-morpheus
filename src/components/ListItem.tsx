@@ -1,13 +1,6 @@
 /* eslint-disable react/no-children-prop */
 import React, { FC } from 'react'
-import Avatar from '@mui/material/Avatar'
-import Card from '@mui/material/Card'
-import CardActionArea from '@mui/material/CardActionArea'
-import CardContent from '@mui/material/CardContent'
-import CardHeader from '@mui/material/CardHeader'
-import CardMedia from '@mui/material/CardMedia'
-import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
+import { CardContent, CardActionArea, Card, CardMedia, CardHeader, Avatar, Typography, Stack } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import WarningIcon from '@mui/icons-material/Warning'
 import { pink, red } from '@mui/material/colors'
@@ -36,13 +29,7 @@ const ListItem: FC<Props> = (props) => {
   return (
     <CardActionArea onClick={onClick} sx={{ minWidth: 256, maxWidth: '100%' }}>
       <Card sx={{ maxWidth: '100%' }}>
-        <CardMedia
-          component="img"
-          height="70"
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          image={`../../public/img/${image}.jpg`}
-          alt="green iguana"
-        />
+        <CardMedia component="img" height="70" image={`../../public/img/${image}.jpg`} alt="green iguana" />
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
