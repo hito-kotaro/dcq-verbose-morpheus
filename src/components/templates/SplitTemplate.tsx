@@ -24,13 +24,12 @@ const SplitTemplate: FC<Props> = (props) => {
   const menuHandler = useToggle()
   return (
     <>
-      <StyledModal open={modalState.isOpen} onClose={modalState.toggle} sx={{ display: 'none' }}>
+      <StyledModal open={modalState.isOpen} onClose={modalState.toggle} sx={{ display: { xs: 'flex', md: 'none' } }}>
         <Fade in={modalState.isOpen}>
-          <Box width={600} bgcolor="white" p={3} borderRadius={5}>
-            {subPanel}
-          </Box>
+          <Box width="100%">{subPanel}</Box>
         </Fade>
       </StyledModal>
+
       <Box>
         <Navbar menuHandler={menuHandler} />
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { AppBar, Box, Badge, styled, Toolbar, Typography, Avatar, Menu, MenuItem } from '@mui/material'
+import { AppBar, Box, Badge, styled, Toolbar, Typography, Avatar, Menu, MenuItem, IconButton } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
@@ -39,10 +39,13 @@ const Navbar: FC<Props> = (props) => {
   return (
     <AppBar position="fixed" sx={{ height: NAVBAR_HEIGHT }}>
       <Styledtoolbar>
-        <Typography variant="h6" sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <Typography variant="h6" sx={{ display: { xs: 'none', md: 'block' } }}>
           DCQ DEV
         </Typography>
-        <MenuIcon sx={{ display: { xs: 'block', md: 'none' } }} />
+
+        <Box onClick={menuHandler.toggle}>
+          <MenuIcon sx={{ display: { xs: 'block', md: 'none' } }} />
+        </Box>
 
         <Icons>
           <Badge badgeContent={0} color="secondary">
