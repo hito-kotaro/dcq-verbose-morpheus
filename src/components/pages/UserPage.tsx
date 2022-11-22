@@ -1,5 +1,5 @@
-import Box from '@mui/material/Box'
 import React, { useState } from 'react'
+import Box from '@mui/material/Box'
 import Quest from '../organisms/Quest/Quest'
 
 const UserPage = () => {

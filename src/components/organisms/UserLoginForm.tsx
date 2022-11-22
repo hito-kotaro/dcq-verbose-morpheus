@@ -16,7 +16,7 @@ const UserLoginForm = () => {
       <LoginForm login={userLogin} />
 
       <Stack direction="column" spacing={1} sx={{ mt: 5 }}>
-        <Button onClick={toAdminLoginPage}>一般ユーザでログイン</Button>s
+        <Button onClick={toAdminLoginPage}>管理者ユーザでログイン</Button>
         <Button onClick={() => {}}>パスワードをお忘れですか？</Button>
       </Stack>
     </Box>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import AdminLoginPage from './components/pages/AdminLoginPage'
 import AdminPage from './components/pages/AdminPage'
 import UserLoginPage from './components/pages/UserLoginPage'
@@ -12,7 +12,7 @@ const Router = () => {
       <Route path="/login/admin" element={<AdminLoginPage />} />
       <Route path="/user" element={<UserPage />} />
       <Route path="/admin" element={<AdminPage />} />
-      <Route path="/" element={<UserLoginPage />} />
+      <Route path="/" element={<Navigate to="/login/user" />} />
     </Routes>
   )
 }

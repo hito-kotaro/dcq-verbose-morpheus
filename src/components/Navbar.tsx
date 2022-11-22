@@ -5,6 +5,7 @@ import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import useToggle, { useToggleType } from '../useToggle'
 import { NAVBAR_HEIGHT } from '../LayoutData'
+import useLogin from '../useLogin'
 
 const Styledtoolbar = styled(Toolbar)({
   display: 'flex',
@@ -36,6 +37,8 @@ type Props = {
 const Navbar: FC<Props> = (props) => {
   const { menuHandler } = props
   const { isOpen, setIsOpen, toggle } = useToggle()
+  const { logout } = useLogin()
+
   return (
     <AppBar position="fixed" sx={{ height: NAVBAR_HEIGHT }}>
       <Styledtoolbar>
@@ -80,7 +83,7 @@ const Navbar: FC<Props> = (props) => {
       >
         <MenuItem onClick={toggle}>Profile</MenuItem>
         <MenuItem onClick={toggle}>My account</MenuItem>
-        <MenuItem onClick={toggle}>Logout</MenuItem>
+        <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
     </AppBar>
   )
