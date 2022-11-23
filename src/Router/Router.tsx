@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import AdminLoginPage from './components/pages/AdminLoginPage'
-import AdminPage from './components/pages/AdminPage'
-import UserLoginPage from './components/pages/UserLoginPage'
-import UserPage from './components/pages/UserPage'
-import PrivateRoutes from './PrivateRoutes'
-import useAdminState from './recoil/AdminState/useAdminState'
-import useIsAuthState from './recoil/isAuthState/useIsAuthState'
-import useLogin from './useLogin'
+import AdminPrivateRoutes from './AdminPrivateRoutes'
+import AdminLoginPage from '../components/pages/AdminLoginPage'
+import AdminPage from '../components/pages/AdminPage'
+import UserLoginPage from '../components/pages/UserLoginPage'
+import UserPage from '../components/pages/UserPage'
+import useAdminState from '../recoil/AdminState/useAdminState'
+import useIsAuthState from '../recoil/isAuthState/useIsAuthState'
+import useLogin, { authCheck } from '../useLogin'
+import UserPrivateRoutes from './UserPrivateRoutes'
 
 const Router = () => {
   const token = localStorage.getItem('token')
   const { validate } = useLogin()
-  const { isAuth, setIsAuth } = useIsAuthState()
-  const { isAdmin } = useAdminState()
+  const { setIsAuth } = useIsAuthState()
+  const { setIsAdmin } = useAdminState()
 
   // /userに直接アクセスしたときに認証のパターン
   // ■ tokenありの場合
@@ -37,22 +38,25 @@ const Router = () => {
 
   useEffect(() => {
     if (token) {
-      validate().then((auth) => {
-        setIsAuth(auth)
+      validate().then((res: authCheck) => {
+        setIsAuth(res.auth)
+        setIsAdmin(res.admin)
       })
     }
   }, [])
 
   return (
     <Routes>
-      <Route element={<PrivateRoutes />}>
+      <Route element={<UserPrivateRoutes />}>
         <Route path="/user" element={<UserPage />} />
-        <Route path="/admin" element={isAdmin ? <AdminPage /> : <Navigate to="/login/admin" />} />
       </Route>
-      {/* tokenがあればとりあえずUserPageに飛ばす */}
+
+      <Route element={<AdminPrivateRoutes />}>
+        <Route path="/admin" element={<AdminPage />} />
+      </Route>
+
       <Route path="/login/user" element={token ? <Navigate to="/user" /> : <UserLoginPage />} />
-      <Route path="/login/admin" element={<AdminLoginPage />} />
-      <Route path="/" element={<Navigate to="/login/user" />} />
+      <Route path="/login/admin" element={token ? <Navigate to="/admin" /> : <AdminLoginPage />} />
     </Routes>
   )
 }

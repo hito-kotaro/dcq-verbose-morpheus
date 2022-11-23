@@ -6,9 +6,14 @@ import useAdminState from './recoil/AdminState/useAdminState'
 import useIsAuthState from './recoil/isAuthState/useIsAuthState'
 import { create } from './Repositories/Repository'
 
+export type authCheck = {
+  auth: boolean
+  admin: boolean
+}
+
 const useLogin = () => {
   const navigate = useNavigate()
-  const { setIsAdmin } = useAdminState()
+  const { isAdmin, setIsAdmin } = useAdminState()
   const { isAuth, setIsAuth } = useIsAuthState()
 
   const errorHandler = (code: number) => {
@@ -33,13 +38,14 @@ const useLogin = () => {
   const validate = useCallback(async () => {
     const instance = create()
     try {
-      await instance.get('/auth')
-      return true
+      const result: AxiosResponse = await instance.get('/auth')
+
+      return result.data
     } catch (e: any) {
       clearStorage()
-      return false
+      return { auth: false, admin: false }
     }
-  }, [])
+  }, [isAdmin, isAuth])
 
   const userLogin = async (user: string, pwd: string) => {
     const instance = create()
@@ -57,7 +63,6 @@ const useLogin = () => {
     try {
       const result: AxiosResponse = await instance.post('/auth/admin', { name: user, password: pwd })
       localStorage.setItem('token', String(result.data.token))
-      setIsAdmin(true)
       navigate('/admin')
     } catch (e: any) {
       errorHandler(Number(e.response.status))
