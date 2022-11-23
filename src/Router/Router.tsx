@@ -5,15 +5,15 @@ import AdminLoginPage from '../components/pages/AdminLoginPage'
 import AdminPage from '../components/pages/AdminPage'
 import UserLoginPage from '../components/pages/UserLoginPage'
 import UserPage from '../components/pages/UserPage'
-import useAdminState from '../recoil/AdminState/useAdminState'
-import useIsAuthState from '../recoil/isAuthState/useIsAuthState'
+import useAdminState from '../recoil/adminState/useAdminState'
+import useAuthState from '../recoil/authState/useAuthState'
 import useLogin, { authCheck } from '../useLogin'
 import UserPrivateRoutes from './UserPrivateRoutes'
 
 const Router = () => {
   const token = localStorage.getItem('token')
   const { validate } = useLogin()
-  const { setIsAuth } = useIsAuthState()
+  const { setIsAuth } = useAuthState()
   const { setIsAdmin } = useAdminState()
 
   // /userに直接アクセスしたときに認証のパターン

@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
-import useIsAuthState from './recoil/isAuthState/useIsAuthState'
+import useAuthState from './recoil/authState/useAuthState'
 import useLogin from './useLogin'
 
 const useAuthChecker = () => {
   const { validate } = useLogin()
-  const { setIsAuth } = useIsAuthState()
+  const { setIsAuth } = useAuthState()
 
   useEffect(() => {
     console.log('check')

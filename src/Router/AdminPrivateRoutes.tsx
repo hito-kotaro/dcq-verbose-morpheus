@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
-import useAdminState from '../recoil/AdminState/useAdminState'
-import useIsAuthState from '../recoil/isAuthState/useIsAuthState'
+import useAdminState from '../recoil/adminState/useAdminState'
+import useAuthState from '../recoil/authState/useAuthState'
 import useLogin, { authCheck } from '../useLogin'
 
 const AdminPrivateRoutes = () => {
-  const { isAuth, setIsAuth } = useIsAuthState()
+  const { isAuth, setIsAuth } = useAuthState()
   const { isAdmin, setIsAdmin } = useAdminState()
   const token = localStorage.getItem('token')
   const { validate } = useLogin()

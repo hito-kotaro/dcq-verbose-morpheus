@@ -2,8 +2,8 @@ import { AxiosResponse } from 'axios'
 import { useCallback } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import useAdminState from './recoil/AdminState/useAdminState'
-import useIsAuthState from './recoil/isAuthState/useIsAuthState'
+import useAdminState from './recoil/adminState/useAdminState'
+import useAuthState from './recoil/authState/useAuthState'
 import { create } from './Repositories/Repository'
 
 export type authCheck = {
@@ -13,8 +13,8 @@ export type authCheck = {
 
 const useLogin = () => {
   const navigate = useNavigate()
-  const { isAdmin, setIsAdmin } = useAdminState()
-  const { isAuth, setIsAuth } = useIsAuthState()
+  const { isAdmin } = useAdminState()
+  const { isAuth } = useAuthState()
 
   const errorHandler = (code: number) => {
     if (code === 500) {

@@ -1,9 +1,9 @@
 import { useRecoilState } from 'recoil'
-import { authState } from './isAuthState'
+import { authState } from './authState'
 
-const useIsAuthState = () => {
+const useAuthState = () => {
   const [isAuth, setIsAuth] = useRecoilState(authState)
   return { isAuth, setIsAuth }
 }
 
-export default useIsAuthState
+export default useAuthState

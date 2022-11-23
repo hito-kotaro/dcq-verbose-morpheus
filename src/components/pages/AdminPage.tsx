@@ -1,5 +1,5 @@
 import React from 'react'
-import useAdminState from '../../recoil/AdminState/useAdminState'
+import useAdminState from '../../recoil/adminState/useAdminState'
 
 const AdminPage = () => {
   const { isAdmin } = useAdminState()
