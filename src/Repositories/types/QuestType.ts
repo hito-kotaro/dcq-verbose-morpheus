@@ -1,3 +1,5 @@
+export type questComponentKey = 'Detail' | 'Create' | 'Update' | 'Empty'
+
 export type questType = {
   id: number
   title: string
@@ -11,7 +13,7 @@ export type questType = {
 
 export const emptyQuest: questType = {
   id: 0,
-  title: '',
+  title: 'クエストを選択してください',
   description: '',
   reward: 0,
   date: '',

@@ -1,10 +1,10 @@
-import React from 'react'
-import useAdminState from '../../recoil/adminState/useAdminState'
+import React, { useState } from 'react'
+import { Box } from '@mui/material'
+import Quest from '../organisms/Quest/Quest'
 
 const AdminPage = () => {
-  const { isAdmin } = useAdminState()
-  console.log(isAdmin)
-  return <div>AdminPage</div>
+  const [screen, setScreen] = useState(<Quest />)
+  return <Box>{screen}</Box>
 }
 
 export default AdminPage

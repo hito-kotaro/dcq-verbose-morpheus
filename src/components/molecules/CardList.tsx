@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
-import { Box } from '@mui/material'
+import { Box, Fab, Typography } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
 import CardListItem, { CardListItemType } from '../atoms/CardListItem'
+import useAdminState from '../../recoil/adminState/useAdminState'
 
 type Props = {
   data: CardListItemType[]
@@ -8,6 +10,7 @@ type Props = {
 
 const CardList: FC<Props> = (props) => {
   const { data } = props
+  const { isAdmin } = useAdminState()
   return (
     <Box p={2} alignContent="center">
       {data.map((d: CardListItemType) => {
@@ -17,6 +20,13 @@ const CardList: FC<Props> = (props) => {
           </Box>
         )
       })}
+      {isAdmin === true ? (
+        <Fab color="secondary" aria-label="add">
+          <AddIcon />
+        </Fab>
+      ) : (
+        ''
+      )}
     </Box>
   )
 }

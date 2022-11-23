@@ -6,10 +6,16 @@ import DetailCard from '../../DetailCard'
 import CardList from '../../molecules/CardList'
 import useQuest from './useQuest'
 import QuestReportForm from '../../QuestReportForm'
+import useAdminState from '../../../recoil/adminState/useAdminState'
+import EmptyState from '../../atoms/EmptyState'
+import CardFrame from '../../molecules/CardFrame'
 
 const Quest = () => {
   const { fetch, pick, list, modalState, onClickCancel } = useQuest()
+  const { isAdmin } = useAdminState()
   const [main, setMain] = useState(<CardList data={[]} />)
+
+  // subをcomponentのIDにする？
   const [sub, setSub] = useState(
     <DetailCard
       title="クエストを選択してください"
@@ -41,7 +47,18 @@ const Quest = () => {
     setMain(<CardList data={list} />)
   }, [list])
 
-  return <SplitTemplate menu={SideMenuData} mainPanel={<Box>{main}</Box>} subPanel={sub} modalState={modalState} />
+  return (
+    <SplitTemplate
+      menu={SideMenuData}
+      mainPanel={<Box>{main}</Box>}
+      subPanel={
+        <CardFrame image="cosmic2">
+          <EmptyState />
+        </CardFrame>
+      }
+      modalState={modalState}
+    />
+  )
 }
 
 export default Quest
