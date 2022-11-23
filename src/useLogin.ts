@@ -2,11 +2,13 @@ import { AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import useAdminState from './recoil/AdminState/useAdminState'
+import useIsAuthState from './recoil/isAuthState/useIsAuthState'
 import { create } from './Repositories/Repository'
 
 const useLogin = () => {
   const navigate = useNavigate()
   const { setIsAdmin } = useAdminState()
+  const { setIsAuth } = useIsAuthState()
 
   const errorHandler = (code: number) => {
     if (code === 500) {
@@ -18,10 +20,36 @@ const useLogin = () => {
     }
   }
 
-  const logout = () => {
+  const clearStorage = () => {
     localStorage.removeItem('token')
-    navigate('/')
   }
+
+  const logout = () => {
+    clearStorage()
+    navigate('/login/user')
+  }
+
+  const validate = async () => {
+    const instance = create()
+    try {
+      await instance.get('/auth')
+      return true
+    } catch (e: any) {
+      clearStorage()
+      return false
+    }
+  }
+
+  // const validateToken = async () => {
+  //   const instance = create()
+  //   try {
+  //     await instance.get('/auth')
+  //     setIsAuth(true)
+  //   } catch (e: any) {
+  //     setIsAuth(false)
+  //     logout()
+  //   }
+  // }
 
   const userLogin = async (user: string, pwd: string) => {
     const instance = create()
@@ -54,7 +82,7 @@ const useLogin = () => {
     navigate('/login/user')
   }
 
-  return { userLogin, adminLogin, toAdminLoginPage, toUserLoginPage, logout }
+  return { userLogin, adminLogin, toAdminLoginPage, toUserLoginPage, logout, clearStorage, validate }
 }
 
 export default useLogin

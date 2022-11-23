@@ -1,17 +1,56 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import AdminLoginPage from './components/pages/AdminLoginPage'
 import AdminPage from './components/pages/AdminPage'
 import UserLoginPage from './components/pages/UserLoginPage'
 import UserPage from './components/pages/UserPage'
+import PrivateRoutes from './PrivateRoutes'
+import useAdminState from './recoil/AdminState/useAdminState'
+import useIsAuthState from './recoil/isAuthState/useIsAuthState'
+import useLogin from './useLogin'
 
 const Router = () => {
+  const token = localStorage.getItem('token')
+  const { validate } = useLogin()
+  const { isAuth, setIsAuth } = useIsAuthState()
+  const { isAdmin } = useAdminState()
+
+  // /userに直接アクセスしたときに認証のパターン
+  // ■ tokenありの場合
+  //  - APIで検証
+  //   ■ 認証されなかった場合
+  //     - tokenを削除してログイン画面に戻る => OK
+  //   ■ 認証された場合
+  //     - tokenを保持したままログイン後ページに遷移 => OK
+  // ■ tokenなしの場合
+  //   - /login/usesrにリダイレクト => OK
+
+  // /login/userにアクセスしたときのパターン
+  // ■ tokenありの場合
+  //  - APIで検証
+  //   ■ 認証されなかった場合
+  //     - tokenを削除してログイン画面に戻る =>
+  //   ■ 認証された場合
+  //     - tokenを保持したままログイン後ページにリダイレクト =>
+  // ■ tokenなしの場合
+  //   - そのまま =>
+
+  useEffect(() => {
+    if (token) {
+      validate().then((auth) => {
+        setIsAuth(auth)
+      })
+    }
+  }, [])
+
   return (
     <Routes>
+      <Route element={<PrivateRoutes />}>
+        <Route path="/user" element={<UserPage />} />
+        <Route path="/admin" element={isAdmin ? <AdminPage /> : <Navigate to="/login/admin" />} />
+      </Route>
       <Route path="/login/user" element={<UserLoginPage />} />
       <Route path="/login/admin" element={<AdminLoginPage />} />
-      <Route path="/user" element={<UserPage />} />
-      <Route path="/admin" element={<AdminPage />} />
       <Route path="/" element={<Navigate to="/login/user" />} />
     </Routes>
   )
