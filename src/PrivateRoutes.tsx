@@ -15,6 +15,7 @@ const PrivateRoutes = () => {
       })
     }
   }, [])
+
   return isAuth ? <Outlet /> : <Navigate to="/login/user" />
 }
 

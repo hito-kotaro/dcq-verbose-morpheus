@@ -27,13 +27,13 @@ const Router = () => {
 
   // /login/userにアクセスしたときのパターン
   // ■ tokenありの場合
-  //  - APIで検証
+  //  - PrivateRouteに飛ばしてtokenを検証
   //   ■ 認証されなかった場合
-  //     - tokenを削除してログイン画面に戻る =>
+  //     - tokenを削除してログイン画面に戻る => OK
   //   ■ 認証された場合
-  //     - tokenを保持したままログイン後ページにリダイレクト =>
+  //     - tokenを保持したまUser画面を表示
   // ■ tokenなしの場合
-  //   - そのまま =>
+  //   - そのままLogin画面を表示 =>
 
   useEffect(() => {
     if (token) {
@@ -49,7 +49,8 @@ const Router = () => {
         <Route path="/user" element={<UserPage />} />
         <Route path="/admin" element={isAdmin ? <AdminPage /> : <Navigate to="/login/admin" />} />
       </Route>
-      <Route path="/login/user" element={<UserLoginPage />} />
+      {/* tokenがあればとりあえずUserPageに飛ばす */}
+      <Route path="/login/user" element={token ? <Navigate to="/user" /> : <UserLoginPage />} />
       <Route path="/login/admin" element={<AdminLoginPage />} />
       <Route path="/" element={<Navigate to="/login/user" />} />
     </Routes>

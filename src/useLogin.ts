@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios'
+import { useCallback } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import useAdminState from './recoil/AdminState/useAdminState'
@@ -8,7 +9,7 @@ import { create } from './Repositories/Repository'
 const useLogin = () => {
   const navigate = useNavigate()
   const { setIsAdmin } = useAdminState()
-  const { setIsAuth } = useIsAuthState()
+  const { isAuth, setIsAuth } = useIsAuthState()
 
   const errorHandler = (code: number) => {
     if (code === 500) {
@@ -29,7 +30,7 @@ const useLogin = () => {
     navigate('/login/user')
   }
 
-  const validate = async () => {
+  const validate = useCallback(async () => {
     const instance = create()
     try {
       await instance.get('/auth')
@@ -38,18 +39,7 @@ const useLogin = () => {
       clearStorage()
       return false
     }
-  }
-
-  // const validateToken = async () => {
-  //   const instance = create()
-  //   try {
-  //     await instance.get('/auth')
-  //     setIsAuth(true)
-  //   } catch (e: any) {
-  //     setIsAuth(false)
-  //     logout()
-  //   }
-  // }
+  }, [])
 
   const userLogin = async (user: string, pwd: string) => {
     const instance = create()
