@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Stack, Button } from '@mui/material'
 import { ReactComponent as LogoAdminLoginMd } from '../../assets/images/logo-admin-login-md.svg'
-import useLogin from '../../useLogin'
+import useLogin from '../../Repositories/auth/useLogin'
 import LoginForm from '../molecules/LoginForm'
 
 const AdminLoginForm = () => {

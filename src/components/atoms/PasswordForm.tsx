@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 import LockIcon from '@mui/icons-material/Lock'
 import { VisibilityOff, Visibility } from '@mui/icons-material'
 import { FormControl, InputLabel, Input, InputAdornment, IconButton } from '@mui/material'
-import type { textInputHandler } from '../../useTextField'
-import useToggle from '../../useToggle'
+import type { textInputHandler } from '../../generalHooks/useTextField'
+import useToggle from '../../generalHooks/useToggle'
 
 type Props = {
   handler: textInputHandler

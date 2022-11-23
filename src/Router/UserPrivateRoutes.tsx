@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
 import useAdminState from '../recoil/adminState/useAdminState'
 import useAuthState from '../recoil/authState/useAuthState'
-import useLogin, { authCheck } from '../useLogin'
+import useLogin, { authCheck } from '../Repositories/auth/useLogin'
 
 const UserPrivateRoutes = () => {
   const { isAuth, setIsAuth } = useAuthState()

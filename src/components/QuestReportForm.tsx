@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Box, TextField, ButtonGroup, Button } from '@mui/material'
 
-import useTextField from '../useTextField'
+import useTextField from '../generalHooks/useTextField'
 
 type Props = {
   onCancel: () => void

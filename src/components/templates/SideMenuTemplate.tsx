@@ -2,8 +2,8 @@ import React, { FC, ReactElement } from 'react'
 import { Box, Stack } from '@mui/material'
 import Navbar from '../Navbar'
 import SideMenu from '../SideMenu'
-import { SideMenuDataType } from '../../SideMenuData'
-import useToggle from '../../useToggle'
+import { SideMenuDataType } from '../../libs/SideMenuData'
+import useToggle from '../../generalHooks/useToggle'
 
 type Props = {
   menu: SideMenuDataType[]

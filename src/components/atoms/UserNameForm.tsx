@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { TextField, InputAdornment } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import type { textInputHandler } from '../../useTextField'
+import type { textInputHandler } from '../../generalHooks/useTextField'
 
 type Props = {
   handler: textInputHandler

@@ -3,9 +3,9 @@ import { AppBar, Box, Badge, styled, Toolbar, Typography, Avatar, Menu, MenuItem
 import MenuIcon from '@mui/icons-material/Menu'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
-import useToggle, { useToggleType } from '../useToggle'
-import { NAVBAR_HEIGHT } from '../LayoutData'
-import useLogin from '../useLogin'
+import useToggle, { useToggleType } from '../generalHooks/useToggle'
+import { NAVBAR_HEIGHT } from '../libs/LayoutData'
+import useLogin from '../Repositories/auth/useLogin'
 
 const Styledtoolbar = styled(Toolbar)({
   display: 'flex',

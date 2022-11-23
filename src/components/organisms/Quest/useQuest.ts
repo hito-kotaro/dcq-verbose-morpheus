@@ -3,8 +3,8 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { create } from '../../../Repositories/Repository'
 import { emptyQuest, questType } from '../../../Repositories/types/QuestType'
-import useToggle from '../../../useToggle'
-import { convDate } from '../../../utils/convDate'
+import useToggle from '../../../generalHooks/useToggle'
+import { convDate } from '../../../libs/convDate'
 import { CardListItemType } from '../../atoms/CardListItem'
 
 const useQuest = () => {

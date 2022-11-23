@@ -1,8 +1,8 @@
 import { Box, Stack, Drawer, Fade, Modal, styled } from '@mui/material'
 import React, { FC, ReactElement } from 'react'
-import { CONTENTS_PADDING } from '../../LayoutData'
-import { SideMenuDataType } from '../../SideMenuData'
-import useToggle, { useToggleType } from '../../useToggle'
+import { CONTENTS_PADDING } from '../../libs/LayoutData'
+import { SideMenuDataType } from '../../libs/SideMenuData'
+import useToggle, { useToggleType } from '../../generalHooks/useToggle'
 import Navbar from '../Navbar'
 import SideMenu from '../SideMenu'
 

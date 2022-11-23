@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
-import { SideMenuData } from '../../../SideMenuData'
+import { SideMenuData } from '../../../libs/SideMenuData'
 import SplitTemplate from '../../templates/SplitTemplate'
 import DetailCard from '../../DetailCard'
 import CardList from '../../molecules/CardList'

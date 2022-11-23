@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Button, Stack } from '@mui/material'
 import PasswordForm from '../atoms/PasswordForm'
 import UserNameForm from '../atoms/UserNameForm'
-import useTextField from '../../useTextField'
+import useTextField from '../../generalHooks/useTextField'
 import CheckBoxWithLabel from '../atoms/CheckBoxWithLabel'
 
 type Props = {

@@ -2,9 +2,9 @@ import { AxiosResponse } from 'axios'
 import { useCallback } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import useAdminState from './recoil/adminState/useAdminState'
-import useAuthState from './recoil/authState/useAuthState'
-import { create } from './Repositories/Repository'
+import useAdminState from '../../recoil/adminState/useAdminState'
+import useAuthState from '../../recoil/authState/useAuthState'
+import { create } from '../Repository'
 
 export type authCheck = {
   auth: boolean

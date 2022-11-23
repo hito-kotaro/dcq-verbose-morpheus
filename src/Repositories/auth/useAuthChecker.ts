@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import useAuthState from './recoil/authState/useAuthState'
+import useAuthState from '../../recoil/authState/useAuthState'
 import useLogin from './useLogin'
 
 const useAuthChecker = () => {

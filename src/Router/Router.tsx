@@ -7,7 +7,7 @@ import UserLoginPage from '../components/pages/UserLoginPage'
 import UserPage from '../components/pages/UserPage'
 import useAdminState from '../recoil/adminState/useAdminState'
 import useAuthState from '../recoil/authState/useAuthState'
-import useLogin, { authCheck } from '../useLogin'
+import useLogin, { authCheck } from '../Repositories/auth/useLogin'
 import UserPrivateRoutes from './UserPrivateRoutes'
 
 const Router = () => {
