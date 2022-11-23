@@ -17,24 +17,14 @@ const Router = () => {
   const { setIsAdmin } = useAdminState()
 
   // /userに直接アクセスしたときに認証のパターン
-  // ■ tokenありの場合
-  //  - APIで検証
+  // ■ tokenがlocalStorageにある場合
+  //  - バックエンドで検証
   //   ■ 認証されなかった場合
   //     - tokenを削除してログイン画面に戻る => OK
   //   ■ 認証された場合
-  //     - tokenを保持したままログイン後ページに遷移 => OK
+  //     - tokenを保持したままログイン後のページに遷移 => OK
   // ■ tokenなしの場合
   //   - /login/usesrにリダイレクト => OK
-
-  // /login/userにアクセスしたときのパターン
-  // ■ tokenありの場合
-  //  - PrivateRouteに飛ばしてtokenを検証
-  //   ■ 認証されなかった場合
-  //     - tokenを削除してログイン画面に戻る => OK
-  //   ■ 認証された場合
-  //     - tokenを保持したまUser画面を表示
-  // ■ tokenなしの場合
-  //   - そのままLogin画面を表示 =>
 
   useEffect(() => {
     if (token) {
