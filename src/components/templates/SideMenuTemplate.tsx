@@ -12,11 +12,11 @@ type Props = {
 
 const SideMenuTemplate: FC<Props> = (props) => {
   const { menu, mainContent } = props
-  const menuHandler = useToggle()
+  const sideMenuHandler = useToggle()
 
   return (
     <Box>
-      <Navbar menuHandler={menuHandler} />
+      <Navbar sideMenuHandler={sideMenuHandler} />
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <SideMenu menu={menu} />
         <Box flex={5}>{mainContent}</Box>

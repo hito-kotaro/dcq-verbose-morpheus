@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import { AppBar, Box, Badge, styled, Toolbar, Typography, Avatar, Menu, MenuItem } from '@mui/material'
+import React, { FC, useState } from 'react'
+import { AppBar, Box, Badge, styled, Toolbar, Typography, Avatar, Menu, MenuItem, Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
@@ -16,6 +16,7 @@ const Icons = styled(Box)(({ theme }) => ({
   display: 'none',
   alignItems: 'center',
   gap: '20px',
+  marginLeft: 'auto',
   [theme.breakpoints.up('sm')]: {
     display: 'flex',
   },
@@ -31,13 +32,19 @@ const UserBox = styled(Box)(({ theme }) => ({
 }))
 
 type Props = {
-  menuHandler: useToggleType
+  sideMenuHandler: useToggleType
 }
 
 const Navbar: FC<Props> = (props) => {
-  const { menuHandler } = props
+  const { sideMenuHandler } = props
   const { isOpen, setIsOpen, toggle } = useToggle()
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { logout } = useLogin()
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    toggle()
+    setAnchorEl(event.currentTarget)
+  }
 
   return (
     <AppBar position="fixed" sx={{ height: NAVBAR_HEIGHT }}>
@@ -46,7 +53,7 @@ const Navbar: FC<Props> = (props) => {
           DCQ DEV
         </Typography>
 
-        <Box onClick={menuHandler.toggle}>
+        <Box onClick={sideMenuHandler.toggle}>
           <MenuIcon sx={{ display: { xs: 'block', md: 'none' } }} />
         </Box>
 
@@ -59,17 +66,26 @@ const Navbar: FC<Props> = (props) => {
             <NotificationsIcon />
           </Badge>
 
-          <Avatar onClick={toggle} sx={{ width: 30, height: 30 }} src="https://mui.com/static/images/avatar/1.jpg" />
+          <Button onClick={handleMenuOpen}>
+            <Avatar sx={{ width: 30, height: 30 }} src="https://mui.com/static/images/avatar/1.jpg" />
+          </Button>
         </Icons>
 
-        <UserBox onClick={toggle}>
-          <Avatar sx={{ width: 30, height: 30 }} src="https://mui.com/static/images/avatar/1.jpg" />
-          <Typography variant="inherit">Kotaro Tohi</Typography>
+        <UserBox>
+          <Button onClick={handleMenuOpen}>
+            <UserBox>
+              <Avatar sx={{ width: 30, height: 30 }} src="https://mui.com/static/images/avatar/1.jpg" />
+              <Typography color="white" variant="inherit">
+                Kotaro Tohi
+              </Typography>
+            </UserBox>
+          </Button>
         </UserBox>
       </Styledtoolbar>
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
         open={isOpen}
         onClose={() => setIsOpen(false)}
         anchorOrigin={{

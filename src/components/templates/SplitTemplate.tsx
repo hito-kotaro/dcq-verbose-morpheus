@@ -21,7 +21,7 @@ const StyledModal = styled(Modal)({
 
 const SplitTemplate: FC<Props> = (props) => {
   const { menu, mainPanel, subPanel, modalState } = props
-  const menuHandler = useToggle()
+  const sideMenuHandler = useToggle()
   return (
     <>
       <StyledModal open={modalState.isOpen} onClose={modalState.toggle} sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -31,7 +31,7 @@ const SplitTemplate: FC<Props> = (props) => {
       </StyledModal>
 
       <Box>
-        <Navbar menuHandler={menuHandler} />
+        <Navbar sideMenuHandler={sideMenuHandler} />
 
         <Stack direction="row" spacing={2} justifyContent="space-between">
           {/* side menu */}
@@ -48,7 +48,11 @@ const SplitTemplate: FC<Props> = (props) => {
             <SideMenu menu={menu} />
           </Box>
 
-          <Drawer open={menuHandler.isOpen} onClose={menuHandler.toggle} sx={{ display: { xs: 'block', md: 'none' } }}>
+          <Drawer
+            open={sideMenuHandler.isOpen}
+            onClose={sideMenuHandler.toggle}
+            sx={{ display: { xs: 'block', md: 'none' } }}
+          >
             <Box width={240}>
               <SideMenu menu={menu} />
             </Box>
