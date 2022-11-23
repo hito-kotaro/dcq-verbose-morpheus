@@ -1,4 +1,4 @@
-export type questComponentKey = 'Detail' | 'Create' | 'Update' | 'Empty'
+export type questSubComponentKey = 'Detail' | 'Create' | 'Update' | 'Empty'
 
 export type questType = {
   id: number

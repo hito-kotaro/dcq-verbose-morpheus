@@ -11,51 +11,41 @@ import EmptyState from '../../atoms/EmptyState'
 import CardFrame from '../../molecules/CardFrame'
 
 const Quest = () => {
-  const { fetch, pick, list, modalState, onClickCancel } = useQuest()
+  const { fetch, quest, sub, list, modalState, onClickCancel } = useQuest()
   const { isAdmin } = useAdminState()
   const [main, setMain] = useState(<CardList data={[]} />)
-
-  // subをcomponentのIDにする？
-  const [sub, setSub] = useState(
-    <DetailCard
-      title="クエストを選択してください"
-      date="date"
-      description="クエストを選択してください"
-      image="cosmic1"
-      point={0}
-    />
-  )
 
   useEffect(() => {
     fetch()
   }, [])
 
-  // pickが変わったらsubSetする
-  useEffect(() => {
-    setSub(
-      <DetailCard
-        title={pick.title}
-        date={pick.date}
-        description={pick.description}
-        image="cosmic2"
-        point={pick.reward}
-        forms={<QuestReportForm onCancel={onClickCancel} />}
-      />
-    )
-  }, [pick])
   useEffect(() => {
     setMain(<CardList data={list} />)
   }, [list])
+
+  useEffect(() => {})
+
+  const chComponent = () => {
+    if (sub === 'Detail') {
+      return (
+        <DetailCard
+          title={quest.title}
+          date={quest.date}
+          description={quest.description}
+          point={quest.reward}
+          forms={<QuestReportForm onCancel={onClickCancel} />}
+        />
+      )
+    }
+
+    return <EmptyState />
+  }
 
   return (
     <SplitTemplate
       menu={SideMenuData}
       mainPanel={<Box>{main}</Box>}
-      subPanel={
-        <CardFrame image="cosmic2">
-          <EmptyState />
-        </CardFrame>
-      }
+      subPanel={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
       modalState={modalState}
     />
   )
