@@ -1,11 +1,8 @@
-import React, { ReactElement, FC, useState } from 'react'
+import React, { ReactElement, FC } from 'react'
 import { Avatar, Box, CardContent, CardHeader, Divider, Stack, Typography } from '@mui/material'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import WarningIcon from '@mui/icons-material/Warning'
 import { pink, red } from '@mui/material/colors'
-import useToggle from '../generalHooks/useToggle'
-import StyledMenu from './atoms/StyledMenu/StyledMenu'
-import { menuItemType, useStyledMenuType } from './atoms/StyledMenu/useStyledMenu'
 import Buttons, { iconButtonType } from './molecules/Buttons'
 
 type Props = {
