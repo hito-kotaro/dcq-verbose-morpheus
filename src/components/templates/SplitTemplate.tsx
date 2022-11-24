@@ -1,6 +1,7 @@
-import { Box, Stack, Drawer, Fade, Modal, styled } from '@mui/material'
 import React, { FC, ReactElement } from 'react'
-import { CONTENTS_PADDING } from '../../libs/LayoutData'
+import { Box, Stack, Drawer, Fade, Modal, styled, Fab } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
+import { CONTENTS_PADDING, SPLIT_FEB_BUTTON_BOTTOM } from '../../libs/LayoutData'
 import { SideMenuDataType } from '../../libs/SideMenuData'
 import useToggle, { useToggleType } from '../../generalHooks/useToggle'
 import Navbar from '../Navbar'
@@ -11,6 +12,8 @@ type Props = {
   mainPanel: ReactElement
   subPanel: ReactElement
   modalState: useToggleType
+  fab?: boolean
+  fabAction?: () => void
 }
 
 const StyledModal = styled(Modal)({
@@ -20,8 +23,9 @@ const StyledModal = styled(Modal)({
 })
 
 const SplitTemplate: FC<Props> = (props) => {
-  const { menu, mainPanel, subPanel, modalState } = props
+  const { menu, mainPanel, subPanel, modalState, fab, fabAction } = props
   const sideMenuHandler = useToggle()
+
   return (
     <>
       <StyledModal open={modalState.isOpen} onClose={modalState.toggle} sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -75,6 +79,15 @@ const SplitTemplate: FC<Props> = (props) => {
             }}
           >
             {mainPanel}
+            {fab ? (
+              <Box position="fixed" sx={{ bottom: SPLIT_FEB_BUTTON_BOTTOM }}>
+                <Fab color="secondary" aria-label="add" onClick={fabAction}>
+                  <AddIcon />
+                </Fab>
+              </Box>
+            ) : (
+              ''
+            )}
           </Box>
 
           <Box

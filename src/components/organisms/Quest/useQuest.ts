@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { create } from '../../../Repositories/Repository'
-import { emptyQuest, questSubComponentKey, questType } from '../../../Repositories/types/QuestType'
+import { createQuestType, emptyQuest, questSubComponentKey, questType } from '../../../Repositories/types/QuestType'
 import useToggle from '../../../generalHooks/useToggle'
 import { convDate } from '../../../libs/convDate'
 import { CardListItemType } from '../../atoms/CardListItem'
@@ -37,22 +37,17 @@ const useQuest = () => {
     }
   }
 
-  // fetch quests
-  const fetch = async () => {
-    const instance = create()
-    try {
-      const result: AxiosResponse = await instance.get('/quest')
-      setQuests(result.data.quests)
-      convQuest2List(result.data.quests)
-    } catch (e: any) {
-      errorHandler(Number(e.response.status))
-    }
-  }
-
   // listをクリックした時のアクション
   const onClickCard = (d: questType) => {
     setQuest(d)
     setSub('Detail')
+    modalState.setIsOpen(true)
+  }
+
+  // 作成ボタンをクリックした時のアクション
+  const onClickCreate = () => {
+    setQuest(emptyQuest)
+    setSub('Create')
     modalState.setIsOpen(true)
   }
 
@@ -77,11 +72,33 @@ const useQuest = () => {
         onClick: () => onClickCard(d),
       }
     })
-
     setList(listData)
   }
 
-  return { fetch, quests, list, sub, quest, modalState, onClickCancel }
+  // fetch quests
+  const fetch = async () => {
+    const instance = create()
+    try {
+      const result: AxiosResponse = await instance.get('/quest')
+      setQuests(result.data.quests)
+      convQuest2List(result.data.quests)
+    } catch (e: any) {
+      errorHandler(Number(e.response.status))
+    }
+  }
+
+  // create quest
+  const post = async (req: createQuestType) => {
+    const instance = create()
+    try {
+      await instance.post('/quest', req)
+      fetch()
+    } catch (e: any) {
+      errorHandler(Number(e.response.status))
+    }
+  }
+
+  return { fetch, post, quests, list, sub, quest, modalState, onClickCancel, onClickCreate }
 }
 
 export default useQuest

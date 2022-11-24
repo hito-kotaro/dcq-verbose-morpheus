@@ -9,21 +9,16 @@ import QuestReportForm from '../../QuestReportForm'
 import useAdminState from '../../../recoil/adminState/useAdminState'
 import EmptyState from '../../atoms/EmptyState'
 import CardFrame from '../../molecules/CardFrame'
+import QuestCreateCard from './QuestCreateCard'
 
 const Quest = () => {
-  const { fetch, quest, sub, list, modalState, onClickCancel } = useQuest()
+  const { quest, sub, list, modalState, post, onClickCancel, onClickCreate } = useQuest()
   const { isAdmin } = useAdminState()
   const [main, setMain] = useState(<CardList data={[]} />)
 
   useEffect(() => {
-    fetch()
-  }, [])
-
-  useEffect(() => {
     setMain(<CardList data={list} />)
   }, [list])
-
-  useEffect(() => {})
 
   const chComponent = () => {
     if (sub === 'Detail') {
@@ -37,6 +32,9 @@ const Quest = () => {
         />
       )
     }
+    if (sub === 'Create') {
+      return <QuestCreateCard onClickCreate={post} onClickCancel={onClickCancel} />
+    }
 
     return <EmptyState />
   }
@@ -47,6 +45,8 @@ const Quest = () => {
       mainPanel={<Box>{main}</Box>}
       subPanel={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
       modalState={modalState}
+      fab={isAdmin}
+      fabAction={onClickCreate}
     />
   )
 }
