@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import UpdateIcon from '@mui/icons-material/Update'
+import SpeedIcon from '@mui/icons-material/Speed'
 import { SideMenuData } from '../../../libs/SideMenuData'
 import SplitTemplate from '../../templates/SplitTemplate'
 import DetailCard from '../../DetailCard'
@@ -10,18 +13,18 @@ import useAdminState from '../../../recoil/adminState/useAdminState'
 import EmptyState from '../../atoms/EmptyState'
 import CardFrame from '../../molecules/CardFrame'
 import QuestCreateCard from './QuestCreateCard'
-import useStyledMenu, { menuItemType } from '../../atoms/StyledMenu/useStyledMenu'
 import ConfirmCard from '../../molecules/ConfirmCard'
+import { iconButtonType } from '../../molecules/Buttons'
 
 const Quest = () => {
   const { quest, sub, setSub, list, modalState, post, onClickCancel, onClickCreate, onClickDelete } = useQuest()
   const { isAdmin } = useAdminState()
-  const menuHandler = useStyledMenu()
   const [main, setMain] = useState(<CardList data={[]} />)
-  const menuItems: menuItemType[] = [
-    { label: 'Update', action: () => console.log('update') },
-    { label: 'Delete', action: onClickDelete },
-    { label: 'Boost!!', action: () => console.log('boost') },
+
+  const buttonList: iconButtonType[] = [
+    { icon: <DeleteIcon />, action: onClickDelete },
+    { icon: <UpdateIcon />, action: onClickDelete },
+    { icon: <SpeedIcon />, action: onClickDelete },
   ]
 
   useEffect(() => {
@@ -39,8 +42,7 @@ const Quest = () => {
           title={quest.title}
           date={quest.date}
           description={quest.description}
-          menuItems={menuItems}
-          menuHandler={menuHandler}
+          buttonList={buttonList}
           point={quest.reward}
           forms={<QuestReportForm onCancel={onClickCancel} />}
         />

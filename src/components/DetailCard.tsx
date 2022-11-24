@@ -6,34 +6,26 @@ import { pink, red } from '@mui/material/colors'
 import useToggle from '../generalHooks/useToggle'
 import StyledMenu from './atoms/StyledMenu/StyledMenu'
 import { menuItemType, useStyledMenuType } from './atoms/StyledMenu/useStyledMenu'
+import Buttons, { iconButtonType } from './molecules/Buttons'
 
 type Props = {
   title: string
   date: string
   description: string
   point: number
-  menuItems?: menuItemType[]
+  buttonList: iconButtonType[]
   penalty?: boolean
   forms?: ReactElement
-  menuHandler: useStyledMenuType
 }
 
 // CardFrameの中身
 
 const DetailCard: FC<Props> = (props) => {
-  const { title, date, description, point, menuItems, menuHandler, penalty, forms } = props
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const menu = useToggle()
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    menu.toggle()
-    setAnchorEl(event.currentTarget)
-  }
+  const { title, date, description, point, buttonList, penalty, forms } = props
+
   return (
     <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        {menuItems ? <StyledMenu menuItems={menuItems} handler={menuHandler} /> : 'kuso'}
-      </Box>
-
+      <Buttons buttonList={buttonList} />
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
