@@ -37,7 +37,7 @@ const Quest = () => {
   const buttonList: iconButtonType[] = [
     { icon: <UpdateIcon />, action: onClickUpdate },
     { icon: <SpeedIcon />, action: onClickDelete },
-    { icon: <DeleteIcon />, action: onClickDelete },
+    { icon: <DeleteIcon color="error" />, action: onClickDelete },
   ]
 
   useEffect(() => {

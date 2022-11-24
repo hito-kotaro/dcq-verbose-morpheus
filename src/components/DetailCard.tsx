@@ -4,6 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import WarningIcon from '@mui/icons-material/Warning'
 import { pink, red } from '@mui/material/colors'
 import Buttons, { iconButtonType } from './molecules/Buttons'
+import useAdminState from '../recoil/adminState/useAdminState'
 
 type Props = {
   title: string
@@ -19,10 +20,11 @@ type Props = {
 
 const DetailCard: FC<Props> = (props) => {
   const { title, date, description, point, buttonList, penalty, forms } = props
+  const { isAdmin } = useAdminState()
 
   return (
     <Box sx={{ p: 3 }}>
-      <Buttons buttonList={buttonList} />
+      {isAdmin === true ? <Buttons buttonList={buttonList} /> : ''}
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
