@@ -6,7 +6,7 @@ import useLogin, { authCheck } from '../Repositories/auth/useLogin'
 
 const AdminPrivateRoutes = () => {
   const { isAuth, setIsAuth } = useAuthState()
-  const { isAdmin, setIsAdmin } = useAdminState()
+  const { setIsAdmin } = useAdminState()
   const token = localStorage.getItem('token')
   const { validate } = useLogin()
 
@@ -19,7 +19,20 @@ const AdminPrivateRoutes = () => {
     }
   }, [])
 
-  return isAuth === true && isAdmin === true ? <Outlet /> : <Navigate to="/login/admin" />
+  const switchRoute = () => {
+    // isAuthがnullの場合何もしない
+    if (!isAuth) {
+      return null
+    }
+
+    // isAuthがbooleanの場合t/fによってreturn
+    if (isAuth === true) {
+      return <Outlet />
+    }
+    return <Navigate to="/login/admin" />
+  }
+
+  return switchRoute()
 }
 
 export default AdminPrivateRoutes

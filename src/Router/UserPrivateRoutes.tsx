@@ -19,7 +19,20 @@ const UserPrivateRoutes = () => {
     }
   }, [])
 
-  return isAuth ? <Outlet /> : <Navigate to="/login/user" />
+  const switchRoute = () => {
+    // isAuthがnullの場合何もしない
+    if (!isAuth) {
+      return null
+    }
+
+    // isAuthがbooleanの場合t/fによってreturn
+    if (isAuth === true) {
+      return <Outlet />
+    }
+    return <Navigate to="/login/user" />
+  }
+
+  return switchRoute()
 }
 
 export default UserPrivateRoutes
