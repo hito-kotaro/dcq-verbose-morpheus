@@ -1,5 +1,13 @@
 export type questSubComponentKey = 'Detail' | 'Create' | 'Update' | 'Delete' | 'Empty'
 
+export type updateQuestType = {
+  title: string
+  description: string
+  example: string
+  reward: number
+  status: boolean
+}
+
 export type createQuestType = {
   title: string
   description: string

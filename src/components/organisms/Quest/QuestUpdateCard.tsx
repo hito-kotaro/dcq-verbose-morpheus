@@ -2,38 +2,38 @@ import React, { FC } from 'react'
 import { Box, CardContent, TextField, Typography } from '@mui/material'
 import useTextField from '../../../generalHooks/useTextField'
 import TwinButton from '../../atoms/TwinButton'
-import { createQuestType, questType } from '../../../Repositories/types/QuestType'
+import { createQuestType, questType, updateQuestType } from '../../../Repositories/types/QuestType'
 
 type Props = {
   // eslint-disable-next-line no-unused-vars
-  onClickCreate: (req: createQuestType) => void
+  onClickUpdate: (id: number, req: updateQuestType) => void
   onClickCancel: () => void
-  quest?: questType
+  quest: questType
 }
 
-// クエストが渡された場合更新する
-const QuestCreateCard: FC<Props> = (props) => {
-  const { onClickCreate, onClickCancel, quest } = props
-  const titleHandler = useTextField(quest ? quest.title : '')
-  const descHandler = useTextField(quest ? quest.description : '')
-  const egHandler = useTextField(quest ? quest.example : '')
-  const pointHandler = useTextField(quest ? String(quest.reward) : '')
+const QuestUpdateCard: FC<Props> = (props) => {
+  const { onClickUpdate, onClickCancel, quest } = props
+  const titleHandler = useTextField(quest.title)
+  const descHandler = useTextField(quest.description)
+  const egHandler = useTextField(quest.example)
+  const pointHandler = useTextField(String(quest.reward))
 
-  const create = () => {
-    const req: createQuestType = {
+  const row = 5
+
+  const update = () => {
+    const req: updateQuestType = {
       title: titleHandler.input,
       description: descHandler.input,
       example: egHandler.input,
       reward: Number(pointHandler.input),
+      status: true,
     }
-    onClickCreate(req)
+    onClickUpdate(quest.id, req)
     titleHandler.clear()
     descHandler.clear()
     egHandler.clear()
     pointHandler.clear()
   }
-
-  const row = 5
 
   return (
     <Box sx={{ p: 3 }}>
@@ -95,14 +95,10 @@ const QuestCreateCard: FC<Props> = (props) => {
             variant="standard"
           />
         </Box>
-        {quest ? (
-          <TwinButton leftLabel="更新" leftAction={create} rightLabel="戻る" rightAction={onClickCancel} />
-        ) : (
-          <TwinButton leftLabel="作成" leftAction={create} rightLabel="戻る" rightAction={onClickCancel} />
-        )}
+        <TwinButton leftLabel="更新" leftAction={update} rightLabel="戻る" rightAction={onClickCancel} />
       </CardContent>
     </Box>
   )
 }
 
-export default QuestCreateCard
+export default QuestUpdateCard

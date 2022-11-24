@@ -2,7 +2,13 @@ import { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { create } from '../../../Repositories/Repository'
-import { createQuestType, emptyQuest, questSubComponentKey, questType } from '../../../Repositories/types/QuestType'
+import {
+  createQuestType,
+  emptyQuest,
+  questSubComponentKey,
+  questType,
+  updateQuestType,
+} from '../../../Repositories/types/QuestType'
 import useToggle from '../../../generalHooks/useToggle'
 import { convDate } from '../../../libs/convDate'
 import { CardListItemType } from '../../atoms/CardListItem'
@@ -51,12 +57,18 @@ const useQuest = () => {
     modalState.setIsOpen(true)
   }
 
+  // 更新ボタンをクリックした時のアクション
+  const onClickUpdate = () => {
+    // setQuest(emptyQuest)
+    setSub('Update')
+    modalState.setIsOpen(true)
+  }
+
   // DetailCardの戻るボタンのアクション
   const onClickCancel = () => {
-    // Fix: 後でEmptyStateを作る
-    setQuest(emptyQuest)
     setSub('Empty')
     modalState.setIsOpen(false)
+    setQuest(emptyQuest)
   }
 
   const onClickDelete = () => {
@@ -102,7 +114,33 @@ const useQuest = () => {
     }
   }
 
-  return { fetch, post, setSub, quests, list, sub, quest, modalState, onClickCancel, onClickCreate, onClickDelete }
+  // update quest
+  const put = async (id: number, req: updateQuestType) => {
+    const instance = create()
+    try {
+      await instance.put(`/quest/${id}`, req)
+      fetch()
+      onClickCancel()
+    } catch (e: any) {
+      errorHandler(Number(e.response.status))
+    }
+  }
+
+  return {
+    fetch,
+    post,
+    put,
+    setSub,
+    quests,
+    list,
+    sub,
+    quest,
+    modalState,
+    onClickCancel,
+    onClickCreate,
+    onClickDelete,
+    onClickUpdate,
+  }
 }
 
 export default useQuest

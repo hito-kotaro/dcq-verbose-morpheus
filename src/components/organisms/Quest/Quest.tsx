@@ -13,18 +13,31 @@ import useAdminState from '../../../recoil/adminState/useAdminState'
 import EmptyState from '../../atoms/EmptyState'
 import CardFrame from '../../molecules/CardFrame'
 import QuestCreateCard from './QuestCreateCard'
+import QuestUpdateCard from './QuestUpdateCard'
 import ConfirmCard from '../../molecules/ConfirmCard'
 import { iconButtonType } from '../../molecules/Buttons'
 
 const Quest = () => {
-  const { quest, sub, setSub, list, modalState, post, onClickCancel, onClickCreate, onClickDelete } = useQuest()
+  const {
+    quest,
+    sub,
+    setSub,
+    list,
+    modalState,
+    post,
+    put,
+    onClickCancel,
+    onClickCreate,
+    onClickDelete,
+    onClickUpdate,
+  } = useQuest()
   const { isAdmin } = useAdminState()
   const [main, setMain] = useState(<CardList data={[]} />)
 
   const buttonList: iconButtonType[] = [
-    { icon: <DeleteIcon />, action: onClickDelete },
-    { icon: <UpdateIcon />, action: onClickDelete },
+    { icon: <UpdateIcon />, action: onClickUpdate },
     { icon: <SpeedIcon />, action: onClickDelete },
+    { icon: <DeleteIcon />, action: onClickDelete },
   ]
 
   useEffect(() => {
@@ -50,6 +63,9 @@ const Quest = () => {
     }
     if (sub === 'Create') {
       return <QuestCreateCard onClickCreate={post} onClickCancel={onClickCancel} />
+    }
+    if (sub === 'Update') {
+      return <QuestUpdateCard onClickUpdate={put} onClickCancel={onClickCancel} quest={quest} />
     }
     if (sub === 'Delete') {
       return (
