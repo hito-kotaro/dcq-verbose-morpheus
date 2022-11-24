@@ -59,6 +59,10 @@ const useQuest = () => {
     modalState.setIsOpen(false)
   }
 
+  const onClickDelete = () => {
+    setSub('Delete')
+  }
+
   // questDataType から CardListItemTypeへの変換
   const convQuest2List = (data: questType[]) => {
     const listData: CardListItemType[] = data.map((d: questType) => {
@@ -98,7 +102,7 @@ const useQuest = () => {
     }
   }
 
-  return { fetch, post, quests, list, sub, quest, modalState, onClickCancel, onClickCreate }
+  return { fetch, post, setSub, quests, list, sub, quest, modalState, onClickCancel, onClickCreate, onClickDelete }
 }
 
 export default useQuest
