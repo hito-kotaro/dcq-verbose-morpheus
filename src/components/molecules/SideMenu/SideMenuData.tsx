@@ -17,17 +17,17 @@ export const SideMenuData: SideMenuDataType[] = [
     icon: <DashboardIcon />,
   },
   {
-    id:2,
+    id: 2,
     title: 'Quests',
     icon: <AssignmentLateIcon />,
   },
   {
-    id:3,
+    id: 3,
     title: 'Requests',
     icon: <ReviewsIcon />,
   },
   {
-    id:4,
+    id: 4,
     title: 'Penalties',
     icon: <AnnouncementIcon />,
   },

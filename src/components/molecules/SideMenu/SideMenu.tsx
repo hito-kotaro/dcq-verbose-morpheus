@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import { SideMenuDataType } from '../libs/SideMenuData'
+import { SideMenuDataType } from './SideMenuData'
 
 type Props = {
   menu: SideMenuDataType[]

@@ -3,7 +3,6 @@ import { Box } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import UpdateIcon from '@mui/icons-material/Update'
 import SpeedIcon from '@mui/icons-material/Speed'
-import { SideMenuData } from '../../../libs/SideMenuData'
 import SplitTemplate from '../../templates/SplitTemplate'
 import DetailCard from '../../DetailCard'
 import CardList from '../../molecules/CardList'
@@ -16,6 +15,7 @@ import QuestCreateCard from './QuestCreateCard'
 import QuestUpdateCard from './QuestUpdateCard'
 import ConfirmCard from '../../molecules/ConfirmCard'
 import { iconButtonType } from '../../molecules/Buttons'
+import { SideMenuData } from '../../molecules/SideMenu/SideMenuData'
 
 const Quest = () => {
   const {
