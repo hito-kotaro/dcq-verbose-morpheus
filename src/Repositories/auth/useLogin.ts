@@ -6,15 +6,15 @@ import useAdminState from '../../recoil/adminState/useAdminState'
 import useAuthState from '../../recoil/authState/useAuthState'
 import { create } from '../Repository'
 
-export type authCheck = {
+export type authCheckType = {
   auth: boolean
   admin: boolean
 }
 
 const useLogin = () => {
   const navigate = useNavigate()
-  const { isAdmin } = useAdminState()
-  const { isAuth } = useAuthState()
+  const { isAdmin, setIsAdmin } = useAdminState()
+  const { isAuth, setIsAuth } = useAuthState()
 
   const errorHandler = (code: number) => {
     if (code === 500) {
@@ -32,6 +32,8 @@ const useLogin = () => {
 
   const logout = () => {
     clearStorage()
+    setIsAuth(null)
+    setIsAdmin(null)
     navigate('/login/user')
   }
 
