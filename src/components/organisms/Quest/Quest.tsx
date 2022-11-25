@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Box } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import UpdateIcon from '@mui/icons-material/Update'
 import SpeedIcon from '@mui/icons-material/Speed'
-import { SideMenuData } from '../../../libs/SideMenuData'
-import SplitTemplate from '../../templates/SplitTemplate'
 import DetailCard from '../../DetailCard'
 import CardList from '../../molecules/CardList'
 import useQuest from './useQuest'
@@ -16,6 +13,7 @@ import QuestCreateCard from './QuestCreateCard'
 import QuestUpdateCard from './QuestUpdateCard'
 import ConfirmCard from '../../molecules/ConfirmCard'
 import { iconButtonType } from '../../molecules/Buttons'
+import HorizonContentsTemplate from '../../templates/HorizonContentsTemplate'
 
 const Quest = () => {
   const {
@@ -41,7 +39,7 @@ const Quest = () => {
   ]
 
   useEffect(() => {
-    setMain(<CardList data={list} />)
+    setMain(<CardList data={list} fab={isAdmin} fabAction={onClickCreate} />)
   }, [list])
 
   useEffect(() => {
@@ -83,13 +81,11 @@ const Quest = () => {
   }
 
   return (
-    <SplitTemplate
-      menu={SideMenuData}
-      mainPanel={<Box>{main}</Box>}
-      subPanel={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
+    <HorizonContentsTemplate
+      left={main}
+      right={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
       modalState={modalState}
-      fab={isAdmin}
-      fabAction={onClickCreate}
+      modalContent={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
     />
   )
 }

@@ -48,6 +48,7 @@ const useQuest = () => {
     setQuest(d)
     setSub('Detail')
     modalState.setIsOpen(true)
+    console.log(modalState.isOpen)
   }
 
   // 作成ボタンをクリックした時のアクション

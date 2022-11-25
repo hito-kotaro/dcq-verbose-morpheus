@@ -3,13 +3,16 @@ import { Box, Fab } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import CardListItem, { CardListItemType } from '../atoms/CardListItem'
 import useAdminState from '../../recoil/adminState/useAdminState'
+import { SPLIT_FEB_BUTTON_BOTTOM } from '../../libs/LayoutData'
 
 type Props = {
   data: CardListItemType[]
+  fab?: boolean | null
+  fabAction?: () => void
 }
 
 const CardList: FC<Props> = (props) => {
-  const { data } = props
+  const { data, fab, fabAction } = props
   const { isAdmin } = useAdminState()
   return (
     <Box p={2} alignContent="center">
@@ -20,13 +23,15 @@ const CardList: FC<Props> = (props) => {
           </Box>
         )
       })}
-      {/* {isAdmin === true ? (
-        <Fab color="secondary" aria-label="add">
-          <AddIcon />
-        </Fab>
+      {fab ? (
+        <Box position="fixed" sx={{ bottom: SPLIT_FEB_BUTTON_BOTTOM }}>
+          <Fab color="secondary" aria-label="add" onClick={fabAction}>
+            <AddIcon />
+          </Fab>
+        </Box>
       ) : (
         ''
-      )} */}
+      )}
     </Box>
   )
 }
