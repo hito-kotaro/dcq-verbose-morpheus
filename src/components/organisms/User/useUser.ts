@@ -13,6 +13,7 @@ import {
 
 const useUser = () => {
   const modalState = useToggle()
+  const dialogState = useToggle()
 
   // fetchしたユーザリストのステート
   const [users, setUsers] = useState<userType[]>([])
@@ -61,6 +62,11 @@ const useUser = () => {
     setUser(emptyUser)
   }
 
+  const onClickDelete = (u: userType) => {
+    setUser(u)
+    dialogState.setIsOpen(true)
+  }
+
   // questDataType から CardListItemTypeへの変換
   const fetch = async () => {
     const instance = create()
@@ -93,7 +99,20 @@ const useUser = () => {
     }
   }
 
-  return { users, user, modalState, sub, post, put, onClickList, onClickCreate, onClickCancel, onClickUpdate }
+  return {
+    users,
+    user,
+    modalState,
+    dialogState,
+    sub,
+    post,
+    put,
+    onClickList,
+    onClickCreate,
+    onClickCancel,
+    onClickUpdate,
+    onClickDelete,
+  }
 }
 
 export default useUser

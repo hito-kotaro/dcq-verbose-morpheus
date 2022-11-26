@@ -1,6 +1,7 @@
 import React, { ReactElement, FC } from 'react'
 import { Box, Fade, Modal, Stack, styled } from '@mui/material'
 import { useToggleType } from '../../generalHooks/useToggle'
+import DialogWrapper from '../molecules/DialogWrapper'
 
 type Props = {
   left: ReactElement

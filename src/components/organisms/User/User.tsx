@@ -11,19 +11,39 @@ import CardFrame from '../../molecules/CardFrame'
 import DetailCard from '../../DetailCard'
 import UserCreateCard from './UserCreateCard'
 import UserUpdateCard from './UserUpdateCard'
+import DialogWrapper from '../../molecules/DialogWrapper'
 
 const User = () => {
-  const { users, user, modalState, sub, post, put, onClickList, onClickCreate, onClickCancel, onClickUpdate } =
-    useUser()
+  const {
+    users,
+    user,
+    modalState,
+    dialogState,
+    sub,
+    post,
+    put,
+    onClickList,
+    onClickCreate,
+    onClickCancel,
+    onClickUpdate,
+    onClickDelete,
+  } = useUser()
+
+  const [main, setMain] = useState(
+    <UserList
+      onClickUpdate={onClickUpdate}
+      onClickDelete={onClickDelete}
+      users={users}
+      onClickList={onClickList}
+      fab
+      fabAction={onClickCreate}
+    />
+  )
 
   const buttons: iconButtonType[] = [
     { id: 1, icon: <UpdateIcon />, action: onClickUpdate },
     { id: 2, icon: <DeleteIcon color="error" />, action: () => {} },
   ]
-
-  const [main, setMain] = useState(
-    <UserList users={users} buttons={buttons} onClickList={onClickList} fab fabAction={onClickCreate} />
-  )
 
   const chComponetn = () => {
     if (sub === 'Detail') {
@@ -44,16 +64,34 @@ const User = () => {
   }
 
   useEffect(() => {
-    setMain(<UserList users={users} buttons={buttons} onClickList={onClickList} fab fabAction={onClickCreate} />)
+    setMain(
+      <UserList
+        users={users}
+        onClickUpdate={onClickUpdate}
+        onClickDelete={onClickDelete}
+        onClickList={onClickList}
+        fab
+        fabAction={onClickCreate}
+      />
+    )
   }, [users])
 
   return (
-    <HorizonContentsTemplate
-      left={main}
-      right={<CardFrame image="cosmic2">{chComponetn()}</CardFrame>}
-      modalContent={<CardFrame image="cosmic2">{chComponetn()}</CardFrame>}
-      modalState={modalState}
-    />
+    <>
+      <DialogWrapper
+        dialogTitle={`${user.name}を削除します`}
+        dialogMsg="削除したユーザに関連する情報は元に戻せません"
+        handler={dialogState}
+        leftAction={dialogState.toggle}
+        rightAction={dialogState.toggle}
+      />
+      <HorizonContentsTemplate
+        left={main}
+        right={<CardFrame image="cosmic2">{chComponetn()}</CardFrame>}
+        modalContent={<CardFrame image="cosmic2">{chComponetn()}</CardFrame>}
+        modalState={modalState}
+      />
+    </>
   )
 }
 

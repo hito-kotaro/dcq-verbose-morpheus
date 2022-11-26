@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { Box, Divider, Fab } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
+import DeleteIcon from '@mui/icons-material/Delete'
+import UpdateIcon from '@mui/icons-material/Update'
 import { SPLIT_FEB_BUTTON_BOTTOM } from '../../../libs/LayoutData'
 import { userType } from '../../../Repositories/types/UserType'
 import { iconButtonType } from '../../molecules/Buttons'
@@ -8,18 +10,23 @@ import UserListItem from './UserListItem'
 
 type Props = {
   users: userType[]
-  buttons: iconButtonType[]
   // eslint-disable-next-line no-unused-vars
+  onClickUpdate: () => void
+  onClickDelete: (u: userType) => void
   onClickList: (u: userType) => void
   fab?: boolean
   fabAction: () => void
 }
 
 const UserList: FC<Props> = (props) => {
-  const { users, buttons, onClickList, fab, fabAction } = props
+  const { users, onClickList, onClickUpdate, onClickDelete, fab, fabAction } = props
   return (
     <Box p={2} alignContent="center">
       {users.map((u: userType) => {
+        const buttons: iconButtonType[] = [
+          { id: 1, icon: <UpdateIcon />, action: onClickUpdate },
+          { id: 2, icon: <DeleteIcon color="error" />, action: () => onClickDelete(u) },
+        ]
         return (
           <Box key={u.id}>
             <UserListItem user={u} buttonList={buttons} onClickList={onClickList} />
