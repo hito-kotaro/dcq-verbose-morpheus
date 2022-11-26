@@ -9,6 +9,7 @@ const useToggle = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggle = () => {
+    console.log('toggle')
     setIsOpen(!isOpen)
   }
   return { isOpen, setIsOpen, toggle }

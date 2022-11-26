@@ -1,4 +1,4 @@
-const recoilKeys = ['QUESTS', 'IS_ADMIN', 'IS_AUTH'] as const
+const recoilKeys = ['QUESTS', 'IS_ADMIN', 'IS_AUTH', 'SCREEN'] as const
 
 // Key: Keyのオブジェクト
 export const recoilKeyHashSet = Object.fromEntries(recoilKeys.map((k) => [k, k])) as {

@@ -6,14 +6,16 @@ import type { textInputHandler } from '../../generalHooks/useTextField'
 type Props = {
   handler: textInputHandler
   onKeyDown: () => void
+  label?: string
 }
 
 const UserNameForm: FC<Props> = (props) => {
-  const { handler, onKeyDown } = props
+  const { handler, onKeyDown, label } = props
 
   return (
     <TextField
-      label="UserName"
+      fullWidth
+      label={label || 'UserName'}
       value={handler.input}
       onChange={handler.onChange}
       InputProps={{

@@ -4,6 +4,7 @@ import PasswordForm from '../atoms/PasswordForm'
 import UserNameForm from '../atoms/UserNameForm'
 import useTextField from '../../generalHooks/useTextField'
 import CheckBoxWithLabel from '../atoms/CheckBoxWithLabel'
+import useCheckBox from '../../generalHooks/useCheckBox'
 
 type Props = {
   // eslint-disable-next-line no-unused-vars
@@ -12,6 +13,7 @@ type Props = {
 
 const LoginForm: FC<Props> = (props) => {
   const { login } = props
+  const checkHandler = useCheckBox()
   const nameHandler = useTextField()
   const pwdHandler = useTextField()
 
@@ -23,7 +25,7 @@ const LoginForm: FC<Props> = (props) => {
       </Stack>
 
       <Stack sx={{ mt: 2 }}>
-        <CheckBoxWithLabel color="#FA9900" label="ログイン状態を維持" />
+        <CheckBoxWithLabel color="#FA9900" label="ログイン状態を維持" handler={checkHandler} />
       </Stack>
 
       <Stack sx={{ mt: 5 }}>

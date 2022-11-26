@@ -2,13 +2,13 @@ import React, { FC, ReactElement } from 'react'
 import { Box, Stack, Drawer, Fade, Modal, styled, Fab } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { CONTENTS_PADDING, SPLIT_FEB_BUTTON_BOTTOM } from '../../libs/LayoutData'
-import { SideMenuDataType } from '../../libs/SideMenuData'
 import useToggle, { useToggleType } from '../../generalHooks/useToggle'
 import Navbar from '../Navbar'
 import SideMenu from '../SideMenu'
+import { sideMenuType } from '../molecules/SideMenu/useSideMenu'
 
 type Props = {
-  menu: SideMenuDataType[]
+  menu: sideMenuType[]
   mainPanel: ReactElement
   subPanel: ReactElement
   modalState: useToggleType
