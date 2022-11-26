@@ -12,6 +12,7 @@ import DetailCard from '../../DetailCard'
 import UserCreateCard from './UserCreateCard'
 import UserUpdateCard from './UserUpdateCard'
 import DialogWrapper from '../../molecules/DialogWrapper'
+import useAdminState from '../../../recoil/adminState/useAdminState'
 
 const User = () => {
   const {
@@ -28,6 +29,8 @@ const User = () => {
     onClickUpdate,
     onClickDelete,
   } = useUser()
+
+  const { isAdmin } = useAdminState()
 
   const [main, setMain] = useState(
     <UserList
@@ -70,7 +73,7 @@ const User = () => {
         onClickUpdate={onClickUpdate}
         onClickDelete={onClickDelete}
         onClickList={onClickList}
-        fab
+        fab={isAdmin!}
         fabAction={onClickCreate}
       />
     )

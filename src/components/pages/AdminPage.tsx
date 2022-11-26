@@ -7,6 +7,7 @@ import Quest from '../organisms/Quest/Quest'
 import useScreenState from '../../recoil/screenState/useScreenState'
 import { sideMenuType } from '../molecules/SideMenu/useSideMenu'
 import BasicTemplate from '../templates/BasicTemplate'
+import User from '../organisms/User/User'
 
 const AdminPage = () => {
   const { screen, changeScreen } = useScreenState()
@@ -36,7 +37,7 @@ const AdminPage = () => {
       return <Box>DASHBOARD</Box>
     }
     if (screen === 'USERS') {
-      return <Box>Users</Box>
+      return <User />
     }
     if (screen === 'QUESTS') {
       return <Quest />

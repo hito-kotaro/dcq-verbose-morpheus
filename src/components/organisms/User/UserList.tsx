@@ -7,6 +7,7 @@ import { SPLIT_FEB_BUTTON_BOTTOM } from '../../../libs/LayoutData'
 import { userType } from '../../../Repositories/types/UserType'
 import { iconButtonType } from '../../molecules/Buttons'
 import UserListItem from './UserListItem'
+import useAdminState from '../../../recoil/adminState/useAdminState'
 
 type Props = {
   users: userType[]
@@ -18,8 +19,10 @@ type Props = {
   fabAction: () => void
 }
 
+// adminの場合 => 全て表示
 const UserList: FC<Props> = (props) => {
   const { users, onClickList, onClickUpdate, onClickDelete, fab, fabAction } = props
+  const { isAdmin } = useAdminState()
   return (
     <Box p={2} alignContent="center">
       {users.map((u: userType) => {
@@ -27,13 +30,20 @@ const UserList: FC<Props> = (props) => {
           { id: 1, icon: <UpdateIcon />, action: onClickUpdate },
           { id: 2, icon: <DeleteIcon color="error" />, action: () => onClickDelete(u) },
         ]
-        return (
+
+        return isAdmin ? (
           <Box key={u.id}>
             <UserListItem user={u} buttonList={buttons} onClickList={onClickList} />
             <Divider />
           </Box>
+        ) : (
+          <Box key={u.id}>
+            <UserListItem user={u} buttonList={[]} onClickList={onClickList} />
+            <Divider />
+          </Box>
         )
       })}
+
       {fab ? (
         <Box position="fixed" sx={{ bottom: SPLIT_FEB_BUTTON_BOTTOM }}>
           <Fab color="secondary" aria-label="add" onClick={fabAction}>
