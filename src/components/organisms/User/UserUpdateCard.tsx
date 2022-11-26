@@ -1,28 +1,29 @@
-import React, { useState, FC, useEffect } from 'react'
-import { Box, CardContent, Stack, Typography } from '@mui/material'
+import React, { FC, useEffect, useState } from 'react'
+import { Box, Typography, CardContent, Stack } from '@mui/material'
+import useCheckBox from '../../../generalHooks/useCheckBox'
 import useTextField from '../../../generalHooks/useTextField'
-import { createUserType } from '../../../Repositories/types/UserType'
+import useAdminState from '../../../recoil/adminState/useAdminState'
+import { updateUserType, userType } from '../../../Repositories/types/UserType'
+import CheckBoxWithLabel from '../../atoms/CheckBoxWithLabel'
 import PasswordForm from '../../atoms/PasswordForm'
 import TwinButton from '../../atoms/TwinButton'
 import UserNameForm from '../../atoms/UserNameForm'
-import CheckBoxWithLabel from '../../atoms/CheckBoxWithLabel'
-import useCheckBox from '../../../generalHooks/useCheckBox'
 
 type Props = {
-  // eslint-disable-next-line no-unused-vars
-  onClickCreate: (req: createUserType) => void
+  onClickUpdate: (id: number, req: updateUserType) => void
   onClickCancel: () => void
+  user: userType
 }
 
-const UserCreateCard: FC<Props> = (props) => {
+const UserUpdateCard: FC<Props> = (props) => {
+  const { onClickUpdate, onClickCancel, user } = props
   const [disabled, setDisabled] = useState(true)
-  const checkHandler = useCheckBox()
-  const nameHandler = useTextField()
+  const checkHandler = useCheckBox(user.admin)
+  const nameHandler = useTextField(user.name)
   const pwdHandler = useTextField()
   const rePwdHandler = useTextField()
-  const { onClickCreate, onClickCancel } = props
+  const { isAdmin } = useAdminState()
 
-  // 作成ユーザのチェック
   useEffect(() => {
     if (
       nameHandler.input.length > 2 &&
@@ -36,13 +37,15 @@ const UserCreateCard: FC<Props> = (props) => {
     }
   }, [pwdHandler.input, rePwdHandler.input])
 
-  const create = () => {
-    const req: createUserType = {
+  const update = () => {
+    const req: updateUserType = {
+      id: user.id,
       name: nameHandler.input,
       password: pwdHandler.input,
+      add_point: 0,
       admin: checkHandler.isCheck,
     }
-    onClickCreate(req)
+    onClickUpdate(user.id, req)
     checkHandler.clear()
     nameHandler.clear()
     pwdHandler.clear()
@@ -52,17 +55,17 @@ const UserCreateCard: FC<Props> = (props) => {
   return (
     <Box sx={{ p: 2 }}>
       <Typography variant="h5" color="secondary">
-        新しいユーザを作成
+        ユーザ情報の更新
       </Typography>
       <CardContent>
         <Stack spacing={5} sx={{ mt: 1 }}>
           <UserNameForm label="新しいユーザ名" handler={nameHandler} onKeyDown={() => {}} />
           <PasswordForm label="新しいパスワード" handler={pwdHandler} onKeyDown={() => {}} />
           <PasswordForm label="再入力" handler={rePwdHandler} onKeyDown={() => {}} />
-          <CheckBoxWithLabel color="seconday" label="管理者として登録する" handler={checkHandler} />
+          {isAdmin ? <CheckBoxWithLabel color="seconday" label="管理者として登録する" handler={checkHandler} /> : ''}
           <TwinButton
             leftLabel="作成"
-            leftAction={create}
+            leftAction={update}
             leftDisabled={disabled}
             rightLabel="戻る"
             rightAction={onClickCancel}
@@ -72,5 +75,4 @@ const UserCreateCard: FC<Props> = (props) => {
     </Box>
   )
 }
-
-export default UserCreateCard
+export default UserUpdateCard

@@ -19,3 +19,11 @@ export type createUserType = {
   password: string
   admin: boolean
 }
+
+export type updateUserType = {
+  id: number
+  name?: string
+  password?: string
+  add_point?: number
+  admin?: boolean
+}

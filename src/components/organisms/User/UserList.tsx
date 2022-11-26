@@ -21,7 +21,7 @@ const UserList: FC<Props> = (props) => {
     <Box p={2} alignContent="center">
       {users.map((u: userType) => {
         return (
-          <Box>
+          <Box key={u.id}>
             <UserListItem user={u} buttonList={buttons} onClickList={onClickList} />
             <Divider />
           </Box>

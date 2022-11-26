@@ -33,9 +33,9 @@ const Quest = () => {
   const [main, setMain] = useState(<CardList data={[]} />)
 
   const buttonList: iconButtonType[] = [
-    { icon: <UpdateIcon />, action: onClickUpdate },
-    { icon: <SpeedIcon />, action: onClickDelete },
-    { icon: <DeleteIcon color="error" />, action: onClickDelete },
+    { id: 1, icon: <UpdateIcon />, action: onClickUpdate },
+    { id: 2, icon: <SpeedIcon />, action: onClickDelete },
+    { id: 3, icon: <DeleteIcon color="error" />, action: onClickDelete },
   ]
 
   useEffect(() => {

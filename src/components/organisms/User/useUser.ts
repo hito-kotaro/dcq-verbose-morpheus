@@ -3,7 +3,13 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import useToggle from '../../../generalHooks/useToggle'
 import { create } from '../../../Repositories/Repository'
-import { createUserType, emptyUser, userSubComponentKey, userType } from '../../../Repositories/types/UserType'
+import {
+  createUserType,
+  emptyUser,
+  updateUserType,
+  userSubComponentKey,
+  userType,
+} from '../../../Repositories/types/UserType'
 
 const useUser = () => {
   const modalState = useToggle()
@@ -43,6 +49,11 @@ const useUser = () => {
     modalState.setIsOpen(true)
   }
 
+  const onClickUpdate = () => {
+    setSub('Update')
+    modalState.setIsOpen(true)
+  }
+
   // DetailCardの戻るボタンのアクション
   const onClickCancel = () => {
     setSub('Empty')
@@ -65,14 +76,24 @@ const useUser = () => {
     const instance = create()
     try {
       const result: AxiosResponse = await instance.post('/user', req)
-      console.log(result.data)
       fetch()
     } catch (e: any) {
       errorHandler(Number(e.response.status))
     }
   }
 
-  return { users, user, modalState, sub, post, onClickList, onClickCreate, onClickCancel }
+  const put = async (id: number, req: updateUserType) => {
+    const instance = create()
+    try {
+      await instance.put(`/user/${id}`, req)
+      await setTimeout(fetch, 300)
+      onClickCancel()
+    } catch (e: any) {
+      errorHandler(Number(e.response.status))
+    }
+  }
+
+  return { users, user, modalState, sub, post, put, onClickList, onClickCreate, onClickCancel, onClickUpdate }
 }
 
 export default useUser
