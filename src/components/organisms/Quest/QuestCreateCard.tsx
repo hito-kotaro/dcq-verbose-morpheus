@@ -2,22 +2,21 @@ import React, { FC } from 'react'
 import { Box, CardContent, TextField, Typography } from '@mui/material'
 import useTextField from '../../../generalHooks/useTextField'
 import TwinButton from '../../atoms/TwinButton'
-import { createQuestType, questType } from '../../../Repositories/types/QuestType'
+import { createQuestType } from '../../../Repositories/types/QuestType'
 
 type Props = {
   // eslint-disable-next-line no-unused-vars
   onClickCreate: (req: createQuestType) => void
   onClickCancel: () => void
-  quest?: questType
 }
 
 // クエストが渡された場合更新する
 const QuestCreateCard: FC<Props> = (props) => {
-  const { onClickCreate, onClickCancel, quest } = props
-  const titleHandler = useTextField(quest ? quest.title : '')
-  const descHandler = useTextField(quest ? quest.description : '')
-  const egHandler = useTextField(quest ? quest.example : '')
-  const pointHandler = useTextField(quest ? String(quest.reward) : '')
+  const { onClickCreate, onClickCancel } = props
+  const titleHandler = useTextField()
+  const descHandler = useTextField()
+  const egHandler = useTextField()
+  const pointHandler = useTextField()
 
   const create = () => {
     const req: createQuestType = {
@@ -39,7 +38,7 @@ const QuestCreateCard: FC<Props> = (props) => {
     <Box sx={{ p: 3 }}>
       <Box sx={{ p: 2 }}>
         <Typography variant="h5" color="secondary">
-          {quest ? 'クエストを更新' : '新しいクエストを作成'}
+          新しいクエストを作成
         </Typography>
       </Box>
 
@@ -95,11 +94,7 @@ const QuestCreateCard: FC<Props> = (props) => {
             variant="standard"
           />
         </Box>
-        {quest ? (
-          <TwinButton leftLabel="更新" leftAction={create} rightLabel="戻る" rightAction={onClickCancel} />
-        ) : (
-          <TwinButton leftLabel="作成" leftAction={create} rightLabel="戻る" rightAction={onClickCancel} />
-        )}
+        <TwinButton leftLabel="作成" leftAction={create} rightLabel="戻る" rightAction={onClickCancel} />
       </CardContent>
     </Box>
   )

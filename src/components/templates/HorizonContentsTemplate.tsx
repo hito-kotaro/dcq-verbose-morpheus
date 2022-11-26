@@ -26,8 +26,10 @@ const HorizonContentsTemplate: FC<Props> = (props) => {
       </StyledModal>
 
       <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Box flex={1}>{left}</Box>
-        <Box flex={1} sx={{ display: { xs: 'none', lg: 'block' } }}>
+        <Box flex={1} sx={{ height: '90vh', display: { xs: 'none', lg: 'block' }, overflowY: 'scroll' }}>
+          {left}
+        </Box>
+        <Box flex={1} sx={{ height: '90vh', display: { xs: 'none', lg: 'block' }, overflowY: 'scroll' }}>
           {right}
         </Box>
       </Stack>

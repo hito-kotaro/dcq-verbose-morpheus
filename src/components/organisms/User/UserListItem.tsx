@@ -13,14 +13,16 @@ export type userListItemType = {
 type Props = {
   user: userType
   buttonList: iconButtonType[]
+  // eslint-disable-next-line no-unused-vars
+  onClickList: (u: userType) => void
 }
 
 const UserListItem: FC<Props> = (props) => {
-  const { user, buttonList } = props
+  const { user, buttonList, onClickList } = props
 
   return (
     <ListItem>
-      <ListItemButton>
+      <ListItemButton onClick={() => onClickList(user)}>
         <ListItemIcon>
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             TK

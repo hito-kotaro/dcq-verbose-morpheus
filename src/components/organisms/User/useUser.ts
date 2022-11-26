@@ -3,13 +3,19 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import useToggle from '../../../generalHooks/useToggle'
 import { create } from '../../../Repositories/Repository'
-import { userType } from '../../../Repositories/types/UserType'
+import { createUserType, emptyUser, userSubComponentKey, userType } from '../../../Repositories/types/UserType'
 
 const useUser = () => {
   const modalState = useToggle()
 
   // fetchしたユーザリストのステート
   const [users, setUsers] = useState<userType[]>([])
+
+  // クリックしたユーザの情報を保持するステート
+  const [user, setUser] = useState<userType>(emptyUser)
+
+  // サブパネルのコンポーネントキーを保持するステート
+  const [sub, setSub] = useState<userSubComponentKey>('Empty')
 
   useEffect(() => {
     fetch()
@@ -25,8 +31,26 @@ const useUser = () => {
     }
   }
 
-  // questDataType から CardListItemTypeへの変換
+  // Listをクリックした時のアクション
+  const onClickList = (u: userType) => {
+    setUser(u)
+    setSub('Detail')
+    modalState.setIsOpen(true)
+  }
 
+  const onClickCreate = () => {
+    setSub('Create')
+    modalState.setIsOpen(true)
+  }
+
+  // DetailCardの戻るボタンのアクション
+  const onClickCancel = () => {
+    setSub('Empty')
+    modalState.setIsOpen(false)
+    setUser(emptyUser)
+  }
+
+  // questDataType から CardListItemTypeへの変換
   const fetch = async () => {
     const instance = create()
     try {
@@ -37,7 +61,18 @@ const useUser = () => {
     }
   }
 
-  return { users, modalState }
+  const post = async (req: createUserType) => {
+    const instance = create()
+    try {
+      const result: AxiosResponse = await instance.post('/user', req)
+      console.log(result.data)
+      fetch()
+    } catch (e: any) {
+      errorHandler(Number(e.response.status))
+    }
+  }
+
+  return { users, user, modalState, sub, post, onClickList, onClickCreate, onClickCancel }
 }
 
 export default useUser

@@ -1,7 +1,7 @@
 import { Box, Stack } from '@mui/material'
 import React, { FC, ReactElement } from 'react'
 import useToggle from '../../generalHooks/useToggle'
-import { CONTENTS_MARGIN, CONTENTS_PADDING } from '../../libs/LayoutData'
+import { CONTENTS_PADDING } from '../../libs/LayoutData'
 import { sideMenuType } from '../molecules/SideMenu/useSideMenu'
 import Navbar from '../Navbar'
 import SideMenu from '../SideMenu'
@@ -27,15 +27,15 @@ const BasicTemplate: FC<Props> = (props) => {
             display: { xs: 'none', sm: 'none', md: 'none', lg: 'block' },
             height: '100vh',
             pt: CONTENTS_PADDING,
-            overflowY: 'scroll',
-            boxShadow: 3,
           }}
         >
-          <SideMenu menu={menu} />
+          <Box position="fixed" sx={{ height: '100vh', px: 3, boxShadow: 3 }}>
+            <SideMenu menu={menu} />
+          </Box>
         </Box>
 
         {/* contents */}
-        <Box flex={5} sx={{ pt: CONTENTS_PADDING, mt: CONTENTS_MARGIN }}>
+        <Box flex={5} sx={{ pt: CONTENTS_PADDING, height: '100vh' }}>
           {children}
         </Box>
       </Stack>

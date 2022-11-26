@@ -8,15 +8,16 @@ import useToggle from '../../generalHooks/useToggle'
 type Props = {
   handler: textInputHandler
   onKeyDown: () => void
+  label?: string
 }
 
 const PasswordForm: FC<Props> = (props) => {
-  const { handler, onKeyDown } = props
+  const { handler, onKeyDown, label } = props
   const { isOpen, toggle } = useToggle()
 
   return (
-    <FormControl variant="standard">
-      <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+    <FormControl variant="standard" fullWidth>
+      <InputLabel htmlFor="standard-adornment-password">{label || 'password'}</InputLabel>
       <Input
         id="standard-adornment-password"
         type={isOpen ? 'text' : 'password'}
