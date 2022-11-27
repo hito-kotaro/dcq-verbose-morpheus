@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete'
 import UpdateIcon from '@mui/icons-material/Update'
 import SpeedIcon from '@mui/icons-material/Speed'
@@ -30,17 +30,12 @@ const Quest = () => {
     onClickUpdate,
   } = useQuest()
   const { isAdmin } = useAdminState()
-  const [main, setMain] = useState(<CardList data={[]} />)
 
   const buttonList: iconButtonType[] = [
     { id: 1, icon: <UpdateIcon />, action: onClickUpdate },
     { id: 2, icon: <SpeedIcon />, action: onClickDelete },
     { id: 3, icon: <DeleteIcon color="error" />, action: onClickDelete },
   ]
-
-  useEffect(() => {
-    setMain(<CardList data={list} fab={isAdmin} fabAction={onClickCreate} />)
-  }, [list])
 
   useEffect(() => {
     chComponent()
@@ -82,7 +77,7 @@ const Quest = () => {
 
   return (
     <HorizonContentsTemplate
-      left={main}
+      left={<CardList data={list} fab={isAdmin} fabAction={onClickCreate} />}
       right={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
       modalState={modalState}
       modalContent={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}

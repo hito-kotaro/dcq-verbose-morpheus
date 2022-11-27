@@ -65,15 +65,15 @@ const useRequest = () => {
 
   // questDataType から CardListItemTypeへの変換
   const convRequest2List = (data: requestType[]) => {
-    // adminの場合
-    // openしている全てのリクエストを表示する
-
     let filtered: requestType[] = []
 
+    // adminの場合
+    // openしている全てのリクエストを表示する
     if (isAdmin || userInfo!.admin) {
       filtered = data.filter((d: requestType) => {
         return d.status === 'open'
       })
+
       // admin以外の場合
       // openしている自分のリクエストのみを表示する
     } else {

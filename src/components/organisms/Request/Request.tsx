@@ -1,5 +1,4 @@
-import { Box } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import useAdminState from '../../../recoil/adminState/useAdminState'
 import EmptyState from '../../atoms/EmptyState'
 import DetailCard from '../../DetailCard'
@@ -10,12 +9,8 @@ import RequestUpdateForm from './RequestUpdateForm'
 import useRequest from './useRequest'
 
 const Request = () => {
-  const { list, fetch, sub, request, modalState, onClickCancel, onClickUpdate } = useRequest()
+  const { list, sub, request, modalState, onClickCancel, onClickUpdate } = useRequest()
   const { isAdmin } = useAdminState()
-
-  // useEffect(() => {
-  //   chComponent()
-  // }, [sub])
 
   const chComponent = () => {
     if (sub === 'Detail') {
@@ -33,15 +28,6 @@ const Request = () => {
           }
         />
       )
-    }
-    if (sub === 'Create') {
-      return <Box>Create</Box>
-    }
-    if (sub === 'Update') {
-      return <Box>Update</Box>
-    }
-    if (sub === 'Delete') {
-      return <Box>Delete</Box>
     }
 
     return <EmptyState />
