@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box } from '@mui/material'
 import DashboardIcon from '@mui/icons-material/Dashboard'
+import HistoryIcon from '@mui/icons-material/History'
 import GroupIcon from '@mui/icons-material/Group'
 import AssignmentLateIcon from '@mui/icons-material/AssignmentLate'
 import AnnouncementIcon from '@mui/icons-material/Announcement'
@@ -10,6 +11,7 @@ import { sideMenuType } from '../molecules/SideMenu/useSideMenu'
 import BasicTemplate from '../templates/BasicTemplate'
 import User from '../organisms/User/User'
 import Request from '../organisms/Request/Request'
+import History from '../organisms/History/History'
 
 const AdminPage = () => {
   const { screen, changeScreen } = useScreenState()
@@ -38,6 +40,12 @@ const AdminPage = () => {
       icon: <AnnouncementIcon />,
       action: () => changeScreen('REQUESTS'),
     },
+    {
+      id: 5,
+      label: 'History',
+      icon: <HistoryIcon />,
+      action: () => changeScreen('HISTORIES'),
+    },
   ]
 
   const changeContent = () => {
@@ -52,6 +60,9 @@ const AdminPage = () => {
     }
     if (screen === 'REQUESTS') {
       return <Request />
+    }
+    if (screen === 'HISTORIES') {
+      return <History />
     }
     return <Box>DASHBOARD</Box>
   }
