@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import useAdminState from '../../recoil/adminState/useAdminState'
 import useAuthState from '../../recoil/authState/useAuthState'
+import useUserInfoState from '../../recoil/userInfoState/useUserInfoState'
 import { create } from '../Repository'
 
 export type authCheckType = {
@@ -15,6 +16,7 @@ const useLogin = () => {
   const navigate = useNavigate()
   const { isAdmin, setIsAdmin } = useAdminState()
   const { isAuth, setIsAuth } = useAuthState()
+  const { userInfo, setUserInfo } = useUserInfoState()
 
   const errorHandler = (code: number) => {
     if (code === 500) {
@@ -34,6 +36,7 @@ const useLogin = () => {
     clearStorage()
     setIsAuth(null)
     setIsAdmin(null)
+    setUserInfo(null)
     navigate('/login/user')
   }
 
@@ -54,6 +57,7 @@ const useLogin = () => {
     try {
       const result: AxiosResponse = await instance.post('/auth/user', { name: user, password: pwd })
       localStorage.setItem('token', String(result.data.token))
+      console.log(result)
       navigate('/user')
     } catch (e: any) {
       errorHandler(Number(e.response.status))
