@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import useAdminState from '../../../recoil/adminState/useAdminState'
 import EmptyState from '../../atoms/EmptyState'
 import DetailCard from '../../DetailCard'
 import CardFrame from '../../molecules/CardFrame'
@@ -10,6 +11,7 @@ import useRequest from './useRequest'
 
 const Request = () => {
   const { list, fetch, sub, request, modalState, onClickCancel, onClickUpdate } = useRequest()
+  const { isAdmin } = useAdminState()
 
   // useEffect(() => {
   //   chComponent()
@@ -25,7 +27,7 @@ const Request = () => {
           buttonList={[]}
           point={request.reward}
           forms={
-            request.status === 'open' ? (
+            isAdmin ? (
               <RequestUpdateForm onClickUpdate={onClickUpdate} onCancel={onClickCancel} request={request} />
             ) : undefined
           }
