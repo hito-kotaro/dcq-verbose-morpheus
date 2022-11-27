@@ -12,6 +12,8 @@ import {
 import { CardListItemType } from '../../atoms/CardListItem'
 import { create } from '../../../Repositories/Repository'
 import { convDate } from '../../../libs/utils'
+import useAdminState from '../../../recoil/adminState/useAdminState'
+import useUserInfoState from '../../../recoil/userInfoState/useUserInfoState'
 
 const useRequest = () => {
   const modalState = useToggle()
@@ -24,6 +26,9 @@ const useRequest = () => {
 
   // requestをlistに変換した配列が入るstate
   const [list, setList] = useState<CardListItemType[]>([])
+
+  const { isAdmin } = useAdminState()
+  const { userInfo } = useUserInfoState()
 
   // useQuestを使うコンポーネントがレンダリングされたときにfetchを実行する
   useEffect(() => {
@@ -60,9 +65,22 @@ const useRequest = () => {
 
   // questDataType から CardListItemTypeへの変換
   const convRequest2List = (data: requestType[]) => {
-    const filtered: requestType[] = data.filter((d: requestType) => {
-      return d.status === 'open'
-    })
+    // adminの場合
+    // openしている全てのリクエストを表示する
+
+    let filtered: requestType[] = []
+
+    if (isAdmin || userInfo!.admin) {
+      filtered = data.filter((d: requestType) => {
+        return d.status === 'open'
+      })
+      // admin以外の場合
+      // openしている自分のリクエストのみを表示する
+    } else {
+      filtered = data.filter((d: requestType) => {
+        return d.status === 'open' && d.applicant === userInfo!.name
+      })
+    }
 
     const listData: CardListItemType[] = filtered.map((d: requestType) => {
       return {

@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
-import { Box, TextField, ButtonGroup, Button, Tooltip } from '@mui/material'
+import { Box, TextField, Tooltip } from '@mui/material'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import useTextField from '../../../generalHooks/useTextField'
 import { requestType, updateRequestType } from '../../../Repositories/types/RequestType'
-import useRequest from './useRequest'
 import Buttons, { iconButtonType } from '../../molecules/Buttons'
 
 type Props = {
   request: requestType
   onCancel: () => void
+  // eslint-disable-next-line no-unused-vars
   onClickUpdate: (id: number, req: updateRequestType) => void
 }
 
