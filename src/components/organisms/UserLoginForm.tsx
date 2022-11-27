@@ -12,6 +12,8 @@ const UserLoginForm = () => {
         <LogoUserLoginMd width="100%" height="100%" />
       </Box>
 
+      <Box sx={{ height: '30px', width: '100%' }} />
+
       {/* input form */}
       <LoginForm login={userLogin} />
 
