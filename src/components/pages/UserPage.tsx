@@ -3,11 +3,13 @@ import Box from '@mui/material/Box'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import GroupIcon from '@mui/icons-material/Group'
 import AssignmentLateIcon from '@mui/icons-material/AssignmentLate'
+import AnnouncementIcon from '@mui/icons-material/Announcement'
 import Quest from '../organisms/Quest/Quest'
 import BasicTemplate from '../templates/BasicTemplate'
 import { sideMenuType } from '../molecules/SideMenu/useSideMenu'
 import useScreenState from '../../recoil/screenState/useScreenState'
 import User from '../organisms/User/User'
+import Request from '../organisms/Request/Request'
 
 const UserPage = () => {
   const { screen, changeScreen } = useScreenState()
@@ -30,6 +32,12 @@ const UserPage = () => {
       icon: <AssignmentLateIcon />,
       action: () => changeScreen('QUESTS'),
     },
+    {
+      id: 4,
+      label: 'Request',
+      icon: <AnnouncementIcon />,
+      action: () => changeScreen('REQUESTS'),
+    },
   ]
 
   const changeContent = () => {
@@ -41,6 +49,9 @@ const UserPage = () => {
     }
     if (screen === 'QUESTS') {
       return <Quest />
+    }
+    if (screen === 'REQUESTS') {
+      return <Request />
     }
     return <Box>DASHBOARD</Box>
   }

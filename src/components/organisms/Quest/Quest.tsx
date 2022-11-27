@@ -55,7 +55,7 @@ const Quest = () => {
           description={quest.description}
           buttonList={buttonList}
           point={quest.reward}
-          forms={<QuestReportForm onCancel={onClickCancel} />}
+          forms={<QuestReportForm quest={quest} onCancel={onClickCancel} />}
         />
       )
     }
