@@ -1,5 +1,5 @@
 import React from 'react'
-import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid'
+import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid'
 import { Box } from '@mui/material'
 import useHistory from './useHistory'
 
@@ -57,7 +57,14 @@ const History = () => {
 
   return (
     <Box sx={{ width: '100%', height: '100%', p: 5 }}>
-      <DataGrid columns={altCols} rows={gridData} sx={styles.grid} />
+      <DataGrid
+        columns={altCols}
+        rows={gridData}
+        sx={styles.grid}
+        components={{
+          Toolbar: GridToolbar,
+        }}
+      />
     </Box>
   )
 }
