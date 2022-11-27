@@ -77,6 +77,7 @@ const Quest = () => {
 
   return (
     <HorizonContentsTemplate
+      title="クエスト一覧"
       left={<CardList data={list} fab={isAdmin} fabAction={onClickCreate} />}
       right={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
       modalState={modalState}

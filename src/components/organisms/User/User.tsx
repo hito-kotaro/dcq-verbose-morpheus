@@ -89,6 +89,7 @@ const User = () => {
         rightAction={dialogState.toggle}
       />
       <HorizonContentsTemplate
+        title="ユーザ一覧"
         left={main}
         right={<CardFrame image="cosmic2">{chComponetn()}</CardFrame>}
         modalContent={<CardFrame image="cosmic2">{chComponetn()}</CardFrame>}

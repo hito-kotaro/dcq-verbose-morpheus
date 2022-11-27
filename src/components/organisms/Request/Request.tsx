@@ -35,6 +35,7 @@ const Request = () => {
 
   return (
     <HorizonContentsTemplate
+      title="承認依頼一覧"
       left={<CardList data={list} />}
       right={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
       modalState={modalState}
