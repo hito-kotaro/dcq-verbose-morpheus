@@ -16,7 +16,7 @@ const useLogin = () => {
   const navigate = useNavigate()
   const { isAdmin, setIsAdmin } = useAdminState()
   const { isAuth, setIsAuth } = useAuthState()
-  const { userInfo, setUserInfo } = useUserInfoState()
+  const { setUserInfo } = useUserInfoState()
 
   const errorHandler = (code: number) => {
     if (code === 500) {
