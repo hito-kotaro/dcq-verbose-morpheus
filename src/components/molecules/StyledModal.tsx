@@ -4,9 +4,11 @@ import { useToggleType } from '../../generalHooks/useToggle'
 
 const MyModal = styled(Modal)({
   display: 'flex',
+  marginLeft: 'auto',
+  marginRight: 'auto',
   alignItems: 'center',
   justifyContent: 'center',
-  // maxWidth: '800px',
+  maxWidth: '800px',
 })
 
 type Props = {

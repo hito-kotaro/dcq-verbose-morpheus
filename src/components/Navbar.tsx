@@ -49,12 +49,12 @@ const Navbar: FC<Props> = (props) => {
   return (
     <AppBar position="fixed" sx={{ height: NAVBAR_HEIGHT }}>
       <Styledtoolbar>
-        <Typography variant="h6" sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Typography variant="h6" sx={{ display: { xs: 'none', lg: 'block' } }}>
           DCQ DEV
         </Typography>
 
         <Box onClick={sideMenuHandler.toggle}>
-          <MenuIcon sx={{ display: { xs: 'block', md: 'none' } }} />
+          <MenuIcon sx={{ display: { xs: 'block', lg: 'none' } }} />
         </Box>
 
         <Icons>

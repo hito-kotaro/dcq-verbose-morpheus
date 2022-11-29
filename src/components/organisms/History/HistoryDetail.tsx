@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react'
-import { Box, CardHeader, Avatar, CardContent, Typography, Stack, Divider, Chip } from '@mui/material'
+import { Box, CardHeader, Avatar, CardContent, Typography, Stack, Divider, Chip, Button } from '@mui/material'
 import { red, pink } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import WarningIcon from '@mui/icons-material/Warning'
@@ -20,7 +20,7 @@ type Props = {
   rUpdatedAt: string
   buttonList: iconButtonType[]
   penalty?: boolean
-  forms?: ReactElement
+  onClickRequest: () => void
 }
 
 const HistoryDetail: FC<Props> = (props) => {
@@ -38,6 +38,7 @@ const HistoryDetail: FC<Props> = (props) => {
     penalty,
     rCreatedAt,
     rUpdatedAt,
+    onClickRequest,
   } = props
   const { isAdmin } = useAdminState()
 
@@ -99,28 +100,33 @@ const HistoryDetail: FC<Props> = (props) => {
         </Stack>
       </CardContent>
       <Divider sx={{ my: 3 }} />
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            TK
-          </Avatar>
-        }
-        title={authorizer}
-        subheader={rUpdatedAt}
-      />
-      <CardContent sx={{ p: 2 }}>
-        <Stack spacing={2}>
-          <Box>
-            <Chip label={status} color={colorSelector()} />
-          </Box>
-          <Box>
-            <Typography variant="body2" color="text.secondary">
-              {authComment}
-            </Typography>
-          </Box>
-        </Stack>
-      </CardContent>
-      <Divider sx={{ my: 3 }} />
+      {status === 'open' ? (
+        <Button onClick={onClickRequest}>Request画面へ</Button>
+      ) : (
+        <>
+          <CardHeader
+            avatar={
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                TK
+              </Avatar>
+            }
+            title={authorizer}
+            subheader={rUpdatedAt}
+          />
+          <CardContent sx={{ p: 2 }}>
+            <Stack spacing={2}>
+              <Box>
+                <Chip label={status} color={colorSelector()} />
+              </Box>
+              <Box>
+                <Typography variant="body2" color="text.secondary">
+                  {authComment}
+                </Typography>
+              </Box>
+            </Stack>
+          </CardContent>
+        </>
+      )}
     </Box>
   )
 }
