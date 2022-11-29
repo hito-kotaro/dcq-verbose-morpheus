@@ -8,7 +8,7 @@ type Props = {
   message: string
   action: () => void
   buttonText: string
-  buttonColor: string
+  buttonColor: 'inherit' | 'error' | 'primary' | 'secondary' | 'success' | 'info' | 'warning' | undefined
 }
 
 const StyledDialog: FC<Props> = (props) => {
