@@ -65,28 +65,21 @@ const useRequest = () => {
 
   // questDataType から CardListItemTypeへの変換
   const convRequest2List = (data: requestType[]) => {
-    // adminの場合全て表示、userの場合自分のリクストのみ表示としたいがうまくいかなかった
-    // userInfoがログインのタイミングでしか取得できず、更新とかするとnullになってしまうのでフィルターできない
-    // 別にすべで表示されてても良さそう
-
-    // let filtered: requestType[] = []
+    let filtered: requestType[] = []
     // adminの場合
     // openしている全てのリクエストを表示する
-    // if (isAdmin) {
-    //   filtered = data.filter((d: requestType) => {
-    //     return d.status === 'open'
-    //   })
+    if (isAdmin) {
+      filtered = data.filter((d: requestType) => {
+        return d.status === 'open'
+      })
 
-    // admin以外の場合
-    // openしている自分のリクエストのみを表示する
-    // } else {
-    //   filtered = data.filter((d: requestType) => {
-    //     return d.status === 'open' && d.applicant === userInfo!.name
-    //   })
-
-    const filtered: requestType[] = data.filter((d: requestType) => {
-      return d.status === 'open'
-    })
+      // admin以外の場合
+      // openしている自分のリクエストのみを表示する
+    } else {
+      filtered = data.filter((d: requestType) => {
+        return d.status === 'open' && d.applicant === userInfo!.name
+      })
+    }
 
     const listData: CardListItemType[] = filtered.map((d: requestType) => {
       return {

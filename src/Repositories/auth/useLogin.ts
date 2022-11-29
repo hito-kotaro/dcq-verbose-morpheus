@@ -16,7 +16,7 @@ const useLogin = () => {
   const navigate = useNavigate()
   const { isAdmin, setIsAdmin } = useAdminState()
   const { isAuth, setIsAuth } = useAuthState()
-  const { userInfo, setUserInfo } = useUserInfoState()
+  const { setUserInfo } = useUserInfoState()
 
   const errorHandler = (code: number) => {
     if (code === 500) {
@@ -70,6 +70,8 @@ const useLogin = () => {
     try {
       const result: AxiosResponse = await instance.post('/auth/admin', { name: user, password: pwd })
       localStorage.setItem('token', String(result.data.token))
+      const res = result.data
+      setUserInfo({ id: res.id, name: res.name, admin: res.admin })
       navigate('/admin')
     } catch (e: any) {
       errorHandler(Number(e.response.status))

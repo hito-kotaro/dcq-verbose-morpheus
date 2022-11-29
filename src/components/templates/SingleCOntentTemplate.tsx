@@ -8,7 +8,7 @@ type Props = {
   modalChildren: ReactElement
   modalState: useToggleType
 }
-const SingleCOntentTemplate: FC<Props> = (props) => {
+const SingleContentTemplate: FC<Props> = (props) => {
   const { children, modalChildren, modalState } = props
 
   return (
@@ -19,4 +19,4 @@ const SingleCOntentTemplate: FC<Props> = (props) => {
   )
 }
 
-export default SingleCOntentTemplate
+export default SingleContentTemplate

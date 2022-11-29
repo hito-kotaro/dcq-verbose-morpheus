@@ -71,7 +71,7 @@ const UserPage = () => {
       return <Request />
     }
     if (screen === 'HISTORIES') {
-      return <History />
+      return <History changeScreen={changeScreen} />
     }
     return <Box>DASHBOARD</Box>
   }
