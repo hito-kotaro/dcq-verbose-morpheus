@@ -6,7 +6,7 @@ export const convDate = (date: string) => {
   const minit = Number(date.substring(14, 16))
   const second = Number(date.substring(17, 19))
   const d = new Date(year, month, day, hour, minit, second)
-  const result = d.toString().substring(4, 24).replace(/\s/g, ',')
+  const result = d.toString().substring(4, 24).replace(/\s/g, '-')
   return result
 }
 

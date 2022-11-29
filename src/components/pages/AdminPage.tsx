@@ -12,39 +12,48 @@ import BasicTemplate from '../templates/BasicTemplate'
 import User from '../organisms/User/User'
 import Request from '../organisms/Request/Request'
 import History from '../organisms/History/History'
+import useToggle from '../../generalHooks/useToggle'
+import { screenKeys } from '../../recoil/screenState/screenKeys'
 
 const AdminPage = () => {
   const { screen, changeScreen } = useScreenState()
+  const sideMenuHandler = useToggle()
+
+  const onClickSideMenuItem = (key: screenKeys) => {
+    changeScreen(key)
+    sideMenuHandler.setIsOpen(false)
+  }
+
   const sideMenuData: sideMenuType[] = [
     {
       id: 1,
       label: 'DashBoard',
       icon: <DashboardIcon />,
-      action: () => changeScreen('DASHBOARD'),
+      action: () => onClickSideMenuItem('DASHBOARD'),
     },
     {
       id: 2,
       label: 'Users',
       icon: <GroupIcon />,
-      action: () => changeScreen('USERS'),
+      action: () => onClickSideMenuItem('USERS'),
     },
     {
       id: 3,
       label: 'Quests',
       icon: <AssignmentLateIcon />,
-      action: () => changeScreen('QUESTS'),
+      action: () => onClickSideMenuItem('QUESTS'),
     },
     {
       id: 4,
       label: 'Request',
       icon: <AnnouncementIcon />,
-      action: () => changeScreen('REQUESTS'),
+      action: () => onClickSideMenuItem('REQUESTS'),
     },
     {
       id: 5,
       label: 'History',
       icon: <HistoryIcon />,
-      action: () => changeScreen('HISTORIES'),
+      action: () => onClickSideMenuItem('HISTORIES'),
     },
   ]
 
@@ -62,12 +71,16 @@ const AdminPage = () => {
       return <Request />
     }
     if (screen === 'HISTORIES') {
-      return <History />
+      return <History changeScreen={changeScreen} />
     }
     return <Box>DASHBOARD</Box>
   }
 
-  return <BasicTemplate menu={sideMenuData}>{changeContent()}</BasicTemplate>
+  return (
+    <BasicTemplate menu={sideMenuData} sideMenuHandler={sideMenuHandler}>
+      {changeContent()}
+    </BasicTemplate>
+  )
 }
 
 export default AdminPage

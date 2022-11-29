@@ -7,7 +7,7 @@ import UserLoginPage from '../components/pages/UserLoginPage'
 import UserPage from '../components/pages/UserPage'
 import useAdminState from '../recoil/adminState/useAdminState'
 import useAuthState from '../recoil/authState/useAuthState'
-import useLogin, { authCheck } from '../Repositories/auth/useLogin'
+import useLogin, { authCheckType } from '../Repositories/auth/useLogin'
 import UserPrivateRoutes from './UserPrivateRoutes'
 
 const Router = () => {
@@ -28,7 +28,7 @@ const Router = () => {
 
   useEffect(() => {
     if (token) {
-      validate().then((res: authCheck) => {
+      validate().then((res: authCheckType) => {
         setIsAuth(res.auth)
         setIsAdmin(res.admin)
       })
