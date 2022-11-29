@@ -19,40 +19,41 @@ const UserPage = () => {
   const { screen, changeScreen } = useScreenState()
   const sideMenuHandler = useToggle()
 
-  const sideMenuAction = (key: screenKeys) => {
+  const onClickSideMenuItem = (key: screenKeys) => {
     changeScreen(key)
     sideMenuHandler.setIsOpen(false)
   }
+
   const sideMenuData: sideMenuType[] = [
     {
       id: 1,
       label: 'DashBoard',
       icon: <DashboardIcon />,
-      action: () => sideMenuAction('DASHBOARD'),
+      action: () => onClickSideMenuItem('DASHBOARD'),
     },
     {
       id: 2,
       label: 'Users',
       icon: <GroupIcon />,
-      action: () => sideMenuAction('USERS'),
+      action: () => onClickSideMenuItem('USERS'),
     },
     {
       id: 3,
       label: 'Quests',
       icon: <AssignmentLateIcon />,
-      action: () => sideMenuAction('QUESTS'),
+      action: () => onClickSideMenuItem('QUESTS'),
     },
     {
       id: 4,
       label: 'Request',
       icon: <AnnouncementIcon />,
-      action: () => sideMenuAction('REQUESTS'),
+      action: () => onClickSideMenuItem('REQUESTS'),
     },
     {
       id: 5,
       label: 'History',
       icon: <HistoryIcon />,
-      action: () => sideMenuAction('HISTORIES'),
+      action: () => onClickSideMenuItem('HISTORIES'),
     },
   ]
 
