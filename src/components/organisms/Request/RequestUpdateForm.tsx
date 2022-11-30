@@ -37,7 +37,7 @@ const RequestUpdateForm: FC<Props> = (props) => {
           <CheckCircleIcon fontSize="large" color="secondary" />
         </Tooltip>
       ),
-      action: () => update('approve'),
+      action: () => update('approved'),
     },
     {
       id: 2,
@@ -46,7 +46,7 @@ const RequestUpdateForm: FC<Props> = (props) => {
           <RemoveCircleIcon fontSize="large" color="error" />
         </Tooltip>
       ),
-      action: () => update('reject'),
+      action: () => update('rejected'),
     },
   ]
 
