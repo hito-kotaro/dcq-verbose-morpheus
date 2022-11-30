@@ -43,13 +43,13 @@ const HistoryDetail: FC<Props> = (props) => {
   const { isAdmin } = useAdminState()
 
   const colorSelector = () => {
-    if (status === 'approve') {
+    if (status === 'approved') {
       return 'success'
     }
-    if (status === 'reject') {
+    if (status === 'rejected') {
       return 'error'
     }
-    if (status === 'cancel') {
+    if (status === 'canceled') {
       return 'warning'
     }
     return 'success'

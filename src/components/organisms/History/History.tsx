@@ -93,6 +93,11 @@ const History: FC<Props> = (props) => {
       width: 200,
     },
     {
+      field: 'reward',
+      headerName: 'ポイント',
+      width: 200,
+    },
+    {
       field: 'created_at',
       headerName: '申請日',
       width: 250,
