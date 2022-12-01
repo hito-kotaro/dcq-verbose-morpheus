@@ -21,6 +21,7 @@ const Quest = () => {
     sub,
     setSub,
     list,
+    isLoading,
     modalState,
     post,
     put,
@@ -82,6 +83,7 @@ const Quest = () => {
       right={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
       modalState={modalState}
       modalContent={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
+      isLoading={isLoading}
     />
   )
 }
