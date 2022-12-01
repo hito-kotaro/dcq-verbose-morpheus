@@ -9,7 +9,7 @@ import RequestUpdateForm from './RequestUpdateForm'
 import useRequest from './useRequest'
 
 const Request = () => {
-  const { list, sub, request, modalState, onClickCancel, onClickUpdate } = useRequest()
+  const { list, isLoading, sub, request, modalState, onClickCancel, onClickUpdate } = useRequest()
   const { isAdmin } = useAdminState()
 
   const chComponent = () => {
@@ -40,6 +40,7 @@ const Request = () => {
       right={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
       modalState={modalState}
       modalContent={<CardFrame image="cosmic2">{chComponent()}</CardFrame>}
+      isLoading={isLoading}
     />
   )
 }

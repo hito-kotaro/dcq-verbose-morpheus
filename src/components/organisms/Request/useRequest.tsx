@@ -17,6 +17,7 @@ import useUserInfoState from '../../../recoil/userInfoState/useUserInfoState'
 
 const useRequest = () => {
   const modalState = useToggle()
+  const [isLoading, setIsLoading] = useState(false)
 
   // Listから選択されたrequestがはいるstate
   const [request, setRequest] = useState<requestType>(emptyRequest)
@@ -99,20 +100,26 @@ const useRequest = () => {
   const fetch = async () => {
     const instance = create()
     try {
+      setIsLoading(true)
       const result: AxiosResponse = await instance.get('/request')
       convRequest2List(result.data.requests)
+      setIsLoading(false)
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      setIsLoading(false)
     }
   }
   // create quest
   const post = async (req: createRequestType) => {
     const instance = create()
     try {
+      setIsLoading(true)
       await instance.post('/request', req)
       fetch()
+      setIsLoading(false)
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      setIsLoading(false)
     }
   }
 
@@ -120,15 +127,18 @@ const useRequest = () => {
   const put = async (id: number, req: updateRequestType) => {
     const instance = create()
     try {
+      setIsLoading(true)
       await instance.put(`/request/${id}`, req)
       await setTimeout(fetch, 300)
       onClickCancel()
+      setIsLoading(false)
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      setIsLoading(false)
     }
   }
 
-  return { list, fetch, post, put, onClickCancel, onClickUpdate, sub, request, modalState }
+  return { list, isLoading, fetch, post, put, onClickCancel, onClickUpdate, sub, request, modalState }
 }
 
 export default useRequest

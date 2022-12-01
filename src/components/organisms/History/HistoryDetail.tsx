@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC } from 'react'
 import { Box, CardHeader, Avatar, CardContent, Typography, Stack, Divider, Chip, Button } from '@mui/material'
 import { red, pink } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite'

@@ -15,6 +15,7 @@ import { CardListItemType } from '../../atoms/CardListItem'
 
 const useQuest = () => {
   const modalState = useToggle()
+  const [isLoading, setIsLoading] = useState(false)
 
   // apiから取得したクエストの配列が入るstate
   const [quests, setQuests] = useState<questType[]>([])
@@ -95,11 +96,14 @@ const useQuest = () => {
   const fetch = async () => {
     const instance = create()
     try {
+      setIsLoading(true)
       const result: AxiosResponse = await instance.get('/quest')
       setQuests(result.data.quests)
       convQuest2List(result.data.quests)
+      setIsLoading(false)
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      setIsLoading(true)
     }
   }
 
@@ -107,10 +111,13 @@ const useQuest = () => {
   const post = async (req: createQuestType) => {
     const instance = create()
     try {
+      setIsLoading(true)
       await instance.post('/quest', req)
       fetch()
+      setIsLoading(false)
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      setIsLoading(false)
     }
   }
 
@@ -118,11 +125,14 @@ const useQuest = () => {
   const put = async (id: number, req: updateQuestType) => {
     const instance = create()
     try {
+      setIsLoading(true)
       await instance.put(`/quest/${id}`, req)
       fetch()
       onClickCancel()
+      setIsLoading(false)
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      setIsLoading(false)
     }
   }
 
@@ -135,6 +145,7 @@ const useQuest = () => {
     list,
     sub,
     quest,
+    isLoading,
     modalState,
     onClickCancel,
     onClickCreate,

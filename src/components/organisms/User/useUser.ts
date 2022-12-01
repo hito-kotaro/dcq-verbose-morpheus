@@ -14,6 +14,7 @@ import {
 const useUser = () => {
   const modalState = useToggle()
   const dialogState = useToggle()
+  const [isLoading, setIsLoading] = useState(false)
 
   // fetchしたユーザリストのステート
   const [users, setUsers] = useState<userType[]>([])
@@ -71,31 +72,40 @@ const useUser = () => {
   const fetch = async () => {
     const instance = create()
     try {
+      setIsLoading(true)
       const result: AxiosResponse = await instance.get('/user')
       setUsers(result.data.users)
+      setIsLoading(false)
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      setIsLoading(false)
     }
   }
 
   const post = async (req: createUserType) => {
     const instance = create()
     try {
-      const result: AxiosResponse = await instance.post('/user', req)
+      setIsLoading(true)
+      await instance.post('/user', req)
       fetch()
+      setIsLoading(false)
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      setIsLoading(false)
     }
   }
 
   const put = async (id: number, req: updateUserType) => {
     const instance = create()
     try {
+      setIsLoading(true)
       await instance.put(`/user/${id}`, req)
       await setTimeout(fetch, 300)
       onClickCancel()
+      setIsLoading(false)
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      setIsLoading(false)
     }
   }
 
@@ -105,6 +115,7 @@ const useUser = () => {
     modalState,
     dialogState,
     sub,
+    isLoading,
     post,
     put,
     onClickList,
