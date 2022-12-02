@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
+import { useSnackbar, VariantType } from 'notistack'
 import toast from 'react-hot-toast'
 import { create } from '../../../Repositories/Repository'
 import {
@@ -14,6 +15,7 @@ import { convDate } from '../../../libs/convDate'
 import { CardListItemType } from '../../atoms/CardListItem'
 
 const useQuest = () => {
+  const { enqueueSnackbar } = useSnackbar()
   const modalState = useToggle()
 
   // apiから取得したクエストの配列が入るstate
@@ -103,14 +105,20 @@ const useQuest = () => {
     }
   }
 
+  const handleClickVariant = (message: string, variant: VariantType) => {
+    enqueueSnackbar(message, { variant })
+  }
+
   // create quest
   const post = async (req: createQuestType) => {
     const instance = create()
     try {
       await instance.post('/quest', req)
+      handleClickVariant('クエスト作成 成功', 'success')
       fetch()
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      handleClickVariant('クエスト作成 失敗', 'error')
     }
   }
 
@@ -119,10 +127,12 @@ const useQuest = () => {
     const instance = create()
     try {
       await instance.put(`/quest/${id}`, req)
+      handleClickVariant('クエスト更新 成功', 'success')
       fetch()
       onClickCancel()
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      handleClickVariant('クエスト更新 失敗', 'error')
     }
   }
 
