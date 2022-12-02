@@ -19,7 +19,7 @@ const LoginForm: FC<Props> = (props) => {
 
   return (
     <>
-      <Stack direction="column" spacing={4} sx={{ mt: 5 }}>
+      <Stack direction="column" spacing={4} sx={{ mt: 3 }}>
         <UserNameForm handler={nameHandler} onKeyDown={() => login(nameHandler.input, pwdHandler.input)} />
         <PasswordForm handler={pwdHandler} onKeyDown={() => login(nameHandler.input, pwdHandler.input)} />
       </Stack>

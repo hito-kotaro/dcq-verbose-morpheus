@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Box } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import UpdateIcon from '@mui/icons-material/Update'
@@ -21,6 +21,7 @@ const User = () => {
     modalState,
     dialogState,
     sub,
+    isLoading,
     post,
     put,
     onClickList,
@@ -31,17 +32,6 @@ const User = () => {
   } = useUser()
 
   const { isAdmin } = useAdminState()
-
-  const [main, setMain] = useState(
-    <UserList
-      onClickUpdate={onClickUpdate}
-      onClickDelete={onClickDelete}
-      users={users}
-      onClickList={onClickList}
-      fab
-      fabAction={onClickCreate}
-    />
-  )
 
   const buttons: iconButtonType[] = [
     { id: 1, icon: <UpdateIcon />, action: onClickUpdate },
@@ -66,19 +56,6 @@ const User = () => {
     return <EmptyState />
   }
 
-  useEffect(() => {
-    setMain(
-      <UserList
-        users={users}
-        onClickUpdate={onClickUpdate}
-        onClickDelete={onClickDelete}
-        onClickList={onClickList}
-        fab={isAdmin!}
-        fabAction={onClickCreate}
-      />
-    )
-  }, [users])
-
   return (
     <>
       <DialogWrapper
@@ -89,10 +66,21 @@ const User = () => {
         rightAction={dialogState.toggle}
       />
       <HorizonContentsTemplate
-        left={main}
+        title="ユーザ一覧"
+        left={
+          <UserList
+            users={users}
+            onClickUpdate={onClickUpdate}
+            onClickDelete={onClickDelete}
+            onClickList={onClickList}
+            fab={isAdmin!}
+            fabAction={onClickCreate}
+          />
+        }
         right={<CardFrame image="cosmic2">{chComponetn()}</CardFrame>}
         modalContent={<CardFrame image="cosmic2">{chComponetn()}</CardFrame>}
         modalState={modalState}
+        isLoading={isLoading}
       />
     </>
   )

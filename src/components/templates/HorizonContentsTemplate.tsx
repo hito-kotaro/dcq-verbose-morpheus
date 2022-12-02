@@ -1,13 +1,14 @@
 import React, { ReactElement, FC } from 'react'
-import { Box, Fade, Modal, Stack, styled } from '@mui/material'
+import { Box, Fade, LinearProgress, Modal, Stack, styled, Typography } from '@mui/material'
 import { useToggleType } from '../../generalHooks/useToggle'
-import DialogWrapper from '../molecules/DialogWrapper'
 
 type Props = {
+  title: string
   left: ReactElement
   right: ReactElement
   modalContent: ReactElement
   modalState: useToggleType
+  isLoading: boolean
 }
 
 const StyledModal = styled(Modal)({
@@ -17,7 +18,7 @@ const StyledModal = styled(Modal)({
 })
 
 const HorizonContentsTemplate: FC<Props> = (props) => {
-  const { left, right, modalContent, modalState } = props
+  const { title, left, right, modalContent, modalState, isLoading } = props
   return (
     <>
       <StyledModal open={modalState.isOpen} onClose={modalState.toggle} sx={{ display: { xs: 'flex', lg: 'none' } }}>
@@ -27,8 +28,11 @@ const HorizonContentsTemplate: FC<Props> = (props) => {
       </StyledModal>
 
       <Stack direction="row" spacing={2} justifyContent="space-between">
-        <Box flex={1} sx={{ height: '90vh', display: { xs: 'none', lg: 'block' }, overflowY: 'scroll' }}>
-          {left}
+        <Box flex={1} sx={{ height: '90vh', overflowY: 'scroll' }}>
+          <Typography variant="h4" sx={{ mt: 2 }}>
+            {title}
+          </Typography>
+          {isLoading ? <LinearProgress color="secondary" /> : left}
         </Box>
         <Box flex={1} sx={{ height: '90vh', display: { xs: 'none', lg: 'block' }, overflowY: 'scroll' }}>
           {right}
