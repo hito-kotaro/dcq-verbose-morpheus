@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import { useSnackbar } from 'notistack'
 import useToggle from '../../../generalHooks/useToggle'
+import useUtils from '../../../libs/useUtils'
 import { create } from '../../../Repositories/Repository'
 import {
   createUserType,
@@ -12,6 +13,8 @@ import {
 } from '../../../Repositories/types/UserType'
 
 const useUser = () => {
+  const { enqueueSnackbar } = useSnackbar()
+  const { errorHandler } = useUtils()
   const modalState = useToggle()
   const dialogState = useToggle()
   const [isLoading, setIsLoading] = useState(false)
@@ -28,16 +31,6 @@ const useUser = () => {
   useEffect(() => {
     fetch()
   }, [])
-
-  const errorHandler = (code: number) => {
-    if (code === 500) {
-      toast.error('サーバエラーです。')
-    } else if (code === 404) {
-      toast.error('リソースが存在しません')
-    } else if (code === 401) {
-      toast.error('認証に失敗しました')
-    }
-  }
 
   // Listをクリックした時のアクション
   const onClickList = (u: userType) => {
@@ -89,9 +82,11 @@ const useUser = () => {
       await instance.post('/user', req)
       fetch()
       setIsLoading(false)
+      enqueueSnackbar('ユーザ作成 成功', { variant: 'success' })
     } catch (e: any) {
       errorHandler(Number(e.response.status))
       setIsLoading(false)
+      enqueueSnackbar('ユーザ作成 失敗', { variant: 'error' })
     }
   }
 
@@ -103,9 +98,11 @@ const useUser = () => {
       await setTimeout(fetch, 300)
       onClickCancel()
       setIsLoading(false)
+      enqueueSnackbar('ユーザ更新 成功', { variant: 'success' })
     } catch (e: any) {
       errorHandler(Number(e.response.status))
       setIsLoading(false)
+      enqueueSnackbar('ユーザ更新 失敗', { variant: 'error' })
     }
   }
 

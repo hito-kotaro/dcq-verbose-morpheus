@@ -1,6 +1,8 @@
 import { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import { useSnackbar } from 'notistack'
+import useToggle from '../../../generalHooks/useToggle'
+import useUtils from '../../../libs/useUtils'
 import { create } from '../../../Repositories/Repository'
 import {
   createQuestType,
@@ -9,11 +11,12 @@ import {
   questType,
   updateQuestType,
 } from '../../../Repositories/types/QuestType'
-import useToggle from '../../../generalHooks/useToggle'
 import { convDate } from '../../../libs/convDate'
 import { CardListItemType } from '../../atoms/CardListItem'
 
 const useQuest = () => {
+  const { enqueueSnackbar } = useSnackbar()
+  const { errorHandler } = useUtils()
   const modalState = useToggle()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -33,16 +36,6 @@ const useQuest = () => {
   useEffect(() => {
     fetch()
   }, [])
-
-  const errorHandler = (code: number) => {
-    if (code === 500) {
-      toast.error('サーバエラーです。')
-    } else if (code === 404) {
-      toast.error('リソースが存在しません')
-    } else if (code === 401) {
-      toast.error('認証に失敗しました')
-    }
-  }
 
   // listをクリックした時のアクション
   const onClickCard = (d: questType) => {
@@ -115,9 +108,11 @@ const useQuest = () => {
       await instance.post('/quest', req)
       fetch()
       setIsLoading(false)
+      enqueueSnackbar('クエスト作成 成功', { variant: 'success' })
     } catch (e: any) {
       errorHandler(Number(e.response.status))
       setIsLoading(false)
+      enqueueSnackbar('クエスト作成 失敗', { variant: 'error' })
     }
   }
 
@@ -130,9 +125,11 @@ const useQuest = () => {
       fetch()
       onClickCancel()
       setIsLoading(false)
+      enqueueSnackbar('クエスト更新 成功', { variant: 'success' })
     } catch (e: any) {
       errorHandler(Number(e.response.status))
       setIsLoading(false)
+      enqueueSnackbar('クエスト更新 失敗', { variant: 'error' })
     }
   }
 
