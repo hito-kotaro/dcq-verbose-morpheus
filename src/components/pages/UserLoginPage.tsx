@@ -1,5 +1,4 @@
 import React from 'react'
-import { Toaster } from 'react-hot-toast'
 import { Box, styled } from '@mui/material'
 import bg from '../../assets/images/bg-user-login-md.jpg'
 import TwinTemplate from '../templates/TwinTemplate'
@@ -13,24 +12,21 @@ const ImageBox = styled(Box)({
 
 const UserLoginPage = () => {
   return (
-    <>
-      <Toaster position="bottom-right" reverseOrder={false} />
-      <TwinTemplate
-        leftContent={
-          <Box bgcolor="black" sx={{ width: '100%', height: '100%' }}>
-            <ImageBox sx={{ width: '100%', height: '100%', opacity: 0.6 }} />
+    <TwinTemplate
+      leftContent={
+        <Box bgcolor="black" sx={{ width: '100%', height: '100%' }}>
+          <ImageBox sx={{ width: '100%', height: '100%', opacity: 0.6 }} />
+        </Box>
+      }
+      rightContent={
+        <Box sx={{ pt: 10 }}>
+          <Box sx={{ width: '60%', mx: 'auto' }}>
+            <UserLoginForm />
           </Box>
-        }
-        rightContent={
-          <Box sx={{ pt: 10 }}>
-            <Box sx={{ width: '60%', mx: 'auto' }}>
-              <UserLoginForm />
-            </Box>
-          </Box>
-        }
-        xsContent={<MobileUserLoginForm />}
-      />
-    </>
+        </Box>
+      }
+      xsContent={<MobileUserLoginForm />}
+    />
   )
 }
 

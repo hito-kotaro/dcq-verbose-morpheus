@@ -1,3 +1,7 @@
+import { useSnackbar } from 'notistack'
+
+const { enqueueSnackbar } = useSnackbar()
+
 export const convDate = (date: string) => {
   const year = Number(date.substring(0, 4))
   const month = Number(date.substring(5, 7))
@@ -16,4 +20,14 @@ export const pickData = (data: any[], id: number) => {
   })
 
   return pick[0]
+}
+
+export const errorHandler = (code: number) => {
+  if (code === 500) {
+    enqueueSnackbar('サーバエラーです', { variant: 'error' })
+  } else if (code === 404) {
+    enqueueSnackbar('リソースが存在しません', { variant: 'error' })
+  } else if (code === 401) {
+    enqueueSnackbar('認証に失敗しました', { variant: 'error' })
+  }
 }

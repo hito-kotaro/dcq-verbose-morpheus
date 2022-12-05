@@ -1,5 +1,4 @@
 import React from 'react'
-import { Toaster } from 'react-hot-toast'
 import { Box, styled } from '@mui/material'
 import bg from '../../assets/images/bg-admin-login-md.jpg'
 import AdminLoginForm from '../organisms/AdminLoginForm'
@@ -13,24 +12,21 @@ const ImageBox = styled(Box)({
 
 const AdminLoginPage = () => {
   return (
-    <>
-      <Toaster position="bottom-right" reverseOrder={false} />
-      <TwinTemplate
-        leftContent={
-          <Box sx={{ pt: 10 }}>
-            <Box sx={{ width: '60%', mx: 'auto' }}>
-              <AdminLoginForm />
-            </Box>
+    <TwinTemplate
+      leftContent={
+        <Box sx={{ pt: 10 }}>
+          <Box sx={{ width: '60%', mx: 'auto' }}>
+            <AdminLoginForm />
           </Box>
-        }
-        rightContent={
-          <Box bgcolor="black" sx={{ width: '100%', height: '100%' }}>
-            <ImageBox sx={{ width: '100%', height: '100%', opacity: 0.6 }} />
-          </Box>
-        }
-        xsContent={<MobileAdminLoginForm />}
-      />
-    </>
+        </Box>
+      }
+      rightContent={
+        <Box bgcolor="black" sx={{ width: '100%', height: '100%' }}>
+          <ImageBox sx={{ width: '100%', height: '100%', opacity: 0.6 }} />
+        </Box>
+      }
+      xsContent={<MobileAdminLoginForm />}
+    />
   )
 }
 

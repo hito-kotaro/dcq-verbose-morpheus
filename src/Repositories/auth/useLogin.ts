@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { useCallback } from 'react'
-import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { errorHandler } from '../../libs/utils'
 import useAdminState from '../../recoil/adminState/useAdminState'
 import useAuthState from '../../recoil/authState/useAuthState'
 import useUserInfoState from '../../recoil/userInfoState/useUserInfoState'
@@ -17,16 +17,6 @@ const useLogin = () => {
   const { isAdmin, setIsAdmin } = useAdminState()
   const { isAuth, setIsAuth } = useAuthState()
   const { setUserInfo } = useUserInfoState()
-
-  const errorHandler = (code: number) => {
-    if (code === 500) {
-      toast.error('サーバエラーです。')
-    } else if (code === 404) {
-      toast.error('ユーザが存在しません')
-    } else if (code === 401) {
-      toast.error('認証に失敗しました')
-    }
-  }
 
   const clearStorage = () => {
     localStorage.removeItem('token')

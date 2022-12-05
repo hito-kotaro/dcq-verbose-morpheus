@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
+import { useSnackbar, VariantType } from 'notistack'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
 import useToggle from '../../../generalHooks/useToggle'
 import {
   requestType,
@@ -11,11 +11,12 @@ import {
 } from '../../../Repositories/types/RequestType'
 import { CardListItemType } from '../../atoms/CardListItem'
 import { create } from '../../../Repositories/Repository'
-import { convDate } from '../../../libs/utils'
+import { convDate, errorHandler } from '../../../libs/utils'
 import useAdminState from '../../../recoil/adminState/useAdminState'
 import useUserInfoState from '../../../recoil/userInfoState/useUserInfoState'
 
 const useRequest = () => {
+  const { enqueueSnackbar } = useSnackbar()
   const modalState = useToggle()
 
   // Listから選択されたrequestがはいるstate
@@ -30,20 +31,14 @@ const useRequest = () => {
   const { isAdmin } = useAdminState()
   const { userInfo } = useUserInfoState()
 
+  const handleClickVariant = (message: string, variant: VariantType) => {
+    enqueueSnackbar(message, { variant })
+  }
+
   // useQuestを使うコンポーネントがレンダリングされたときにfetchを実行する
   useEffect(() => {
     fetch()
   }, [])
-
-  const errorHandler = (code: number) => {
-    if (code === 500) {
-      toast.error('サーバエラーです。')
-    } else if (code === 404) {
-      toast.error('リソースが存在しません')
-    } else if (code === 401) {
-      toast.error('認証に失敗しました')
-    }
-  }
 
   // listをクリックした時のアクション
   const onClickCard = (d: requestType) => {
@@ -105,14 +100,16 @@ const useRequest = () => {
       errorHandler(Number(e.response.status))
     }
   }
-  // create quest
+  // create request
   const post = async (req: createRequestType) => {
     const instance = create()
     try {
       await instance.post('/request', req)
       fetch()
+      handleClickVariant('リクエスト作成 成功', 'success')
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      handleClickVariant('リクエスト作成 失敗', 'error')
     }
   }
 
@@ -123,8 +120,10 @@ const useRequest = () => {
       await instance.put(`/request/${id}`, req)
       await setTimeout(fetch, 300)
       onClickCancel()
+      handleClickVariant('リクエスト更新 成功', 'success')
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      handleClickVariant('リクエスト更新 失敗', 'error')
     }
   }
 

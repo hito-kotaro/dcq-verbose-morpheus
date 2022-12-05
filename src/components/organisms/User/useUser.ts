@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import { useSnackbar, VariantType } from 'notistack'
 import useToggle from '../../../generalHooks/useToggle'
 import { create } from '../../../Repositories/Repository'
 import {
@@ -10,8 +10,10 @@ import {
   userSubComponentKey,
   userType,
 } from '../../../Repositories/types/UserType'
+import { errorHandler } from '../../../libs/utils'
 
 const useUser = () => {
+  const { enqueueSnackbar } = useSnackbar()
   const modalState = useToggle()
   const dialogState = useToggle()
 
@@ -27,16 +29,6 @@ const useUser = () => {
   useEffect(() => {
     fetch()
   }, [])
-
-  const errorHandler = (code: number) => {
-    if (code === 500) {
-      toast.error('サーバエラーです。')
-    } else if (code === 404) {
-      toast.error('リソースが存在しません')
-    } else if (code === 401) {
-      toast.error('認証に失敗しました')
-    }
-  }
 
   // Listをクリックした時のアクション
   const onClickList = (u: userType) => {
@@ -67,6 +59,10 @@ const useUser = () => {
     dialogState.setIsOpen(true)
   }
 
+  const handleClickVariant = (message: string, variant: VariantType) => {
+    enqueueSnackbar(message, { variant })
+  }
+
   // questDataType から CardListItemTypeへの変換
   const fetch = async () => {
     const instance = create()
@@ -81,10 +77,12 @@ const useUser = () => {
   const post = async (req: createUserType) => {
     const instance = create()
     try {
-      const result: AxiosResponse = await instance.post('/user', req)
+      await instance.post('/user', req)
       fetch()
+      handleClickVariant('ユーザ作成 成功', 'success')
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      handleClickVariant('ユーザ作成 失敗', 'error')
     }
   }
 
@@ -94,8 +92,10 @@ const useUser = () => {
       await instance.put(`/user/${id}`, req)
       await setTimeout(fetch, 300)
       onClickCancel()
+      handleClickVariant('ユーザ更新 成功', 'success')
     } catch (e: any) {
       errorHandler(Number(e.response.status))
+      handleClickVariant('ユーザ更新 失敗', 'error')
     }
   }
 

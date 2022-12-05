@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import { useSnackbar, VariantType } from 'notistack'
-import toast from 'react-hot-toast'
 import { create } from '../../../Repositories/Repository'
 import {
   createQuestType,
@@ -13,6 +12,7 @@ import {
 import useToggle from '../../../generalHooks/useToggle'
 import { convDate } from '../../../libs/convDate'
 import { CardListItemType } from '../../atoms/CardListItem'
+import { errorHandler } from '../../../libs/utils'
 
 const useQuest = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -34,16 +34,6 @@ const useQuest = () => {
   useEffect(() => {
     fetch()
   }, [])
-
-  const errorHandler = (code: number) => {
-    if (code === 500) {
-      toast.error('サーバエラーです。')
-    } else if (code === 404) {
-      toast.error('リソースが存在しません')
-    } else if (code === 401) {
-      toast.error('認証に失敗しました')
-    }
-  }
 
   // listをクリックした時のアクション
   const onClickCard = (d: questType) => {
