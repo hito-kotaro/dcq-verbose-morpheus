@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
+import { useSnackbar } from 'notistack'
 import useToggle from '../../../generalHooks/useToggle'
+import useUtils from '../../../libs/useUtils'
 import {
   requestType,
   requestSubComponentKey,
@@ -16,6 +17,8 @@ import useAdminState from '../../../recoil/adminState/useAdminState'
 import useUserInfoState from '../../../recoil/userInfoState/useUserInfoState'
 
 const useRequest = () => {
+  const { enqueueSnackbar } = useSnackbar()
+  const { errorHandler } = useUtils()
   const modalState = useToggle()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -35,16 +38,6 @@ const useRequest = () => {
   useEffect(() => {
     fetch()
   }, [])
-
-  const errorHandler = (code: number) => {
-    if (code === 500) {
-      toast.error('サーバエラーです。')
-    } else if (code === 404) {
-      toast.error('リソースが存在しません')
-    } else if (code === 401) {
-      toast.error('認証に失敗しました')
-    }
-  }
 
   // listをクリックした時のアクション
   const onClickCard = (d: requestType) => {
@@ -117,9 +110,11 @@ const useRequest = () => {
       await instance.post('/request', req)
       fetch()
       setIsLoading(false)
+      enqueueSnackbar('リクエスト作成 成功', { variant: 'success' })
     } catch (e: any) {
       errorHandler(Number(e.response.status))
       setIsLoading(false)
+      enqueueSnackbar('リクエスト作成 失敗', { variant: 'error' })
     }
   }
 
@@ -132,9 +127,11 @@ const useRequest = () => {
       await setTimeout(fetch, 300)
       onClickCancel()
       setIsLoading(false)
+      enqueueSnackbar('リクエスト更新 成功', { variant: 'success' })
     } catch (e: any) {
       errorHandler(Number(e.response.status))
       setIsLoading(false)
+      enqueueSnackbar('リクエスト更新 失敗', { variant: 'error' })
     }
   }
 
