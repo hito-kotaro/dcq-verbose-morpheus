@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Box, CardContent, TextField, Typography } from '@mui/material'
 import useTextField from '../../../generalHooks/useTextField'
 import TwinButton from '../../atoms/TwinButton'
-import { createQuestType, questType, updateQuestType } from '../../../Repositories/types/QuestType'
+import { questType, updateQuestType } from '../../../Repositories/types/QuestType'
 
 type Props = {
   // eslint-disable-next-line no-unused-vars
