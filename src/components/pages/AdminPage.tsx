@@ -5,7 +5,6 @@ import HistoryIcon from '@mui/icons-material/History'
 import GroupIcon from '@mui/icons-material/Group'
 import AssignmentLateIcon from '@mui/icons-material/AssignmentLate'
 import AnnouncementIcon from '@mui/icons-material/Announcement'
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import Quest from '../organisms/Quest/Quest'
 import useScreenState from '../../recoil/screenState/useScreenState'
 import { sideMenuType } from '../molecules/SideMenu/useSideMenu'
@@ -15,7 +14,6 @@ import Request from '../organisms/Request/Request'
 import History from '../organisms/History/History'
 import useToggle from '../../generalHooks/useToggle'
 import { screenKeys } from '../../recoil/screenState/screenKeys'
-import Reward from '../organisms/Reward/Reward'
 
 const AdminPage = () => {
   const { screen, changeScreen } = useScreenState()
@@ -57,12 +55,6 @@ const AdminPage = () => {
       icon: <HistoryIcon />,
       action: () => onClickSideMenuItem('HISTORIES'),
     },
-    {
-      id: 6,
-      label: 'Reward',
-      icon: <EmojiEventsIcon />,
-      action: () => onClickSideMenuItem('REWARDS'),
-    },
   ]
 
   const changeContent = () => {
@@ -80,9 +72,6 @@ const AdminPage = () => {
     }
     if (screen === 'HISTORIES') {
       return <History changeScreen={changeScreen} />
-    }
-    if (screen === 'REWARDS') {
-      return <Reward />
     }
     return <Box>DASHBOARD</Box>
   }
