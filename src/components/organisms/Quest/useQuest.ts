@@ -20,6 +20,9 @@ const useQuest = () => {
   const modalState = useToggle()
   const [isLoading, setIsLoading] = useState(false)
 
+  // apiから取得したクエストの配列が入るstate
+  const [quests, setQuests] = useState<questType[]>([])
+
   // Listから選択されたquestがはいるstate
   const [quest, setQuest] = useState<questType>(emptyQuest)
 
@@ -88,6 +91,7 @@ const useQuest = () => {
     try {
       setIsLoading(true)
       const result: AxiosResponse = await instance.get('/quest')
+      setQuests(result.data.quests)
       convQuest2List(result.data.quests)
       setIsLoading(false)
     } catch (e: any) {
@@ -134,6 +138,7 @@ const useQuest = () => {
     post,
     put,
     setSub,
+    quests,
     list,
     sub,
     quest,

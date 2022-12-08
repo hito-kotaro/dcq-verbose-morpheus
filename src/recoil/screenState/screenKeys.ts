@@ -1,1 +1,1 @@
-export type screenKeys = 'DASHBOARD' | 'QUESTS' | 'USERS' | 'REQUESTS' | 'HISTORIES' | 'REWARDS'
+export type screenKeys = 'DASHBOARD' | 'QUESTS' | 'USERS' | 'REQUESTS' | 'HISTORIES'
