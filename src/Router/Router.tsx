@@ -47,6 +47,7 @@ const Router = () => {
 
       <Route path="/login/user" element={token ? <Navigate to="/user" /> : <UserLoginPage />} />
       <Route path="/login/admin" element={token ? <Navigate to="/admin" /> : <AdminLoginPage />} />
+      <Route path="/" element={<Navigate to="/login/user" />} />
     </Routes>
   )
 }
